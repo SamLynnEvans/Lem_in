@@ -6,113 +6,6 @@ void	error_exit(void)
 	exit(1);
 }
 
-char	**ft_add_charpointer(char **array, char *content, int count)
-{
-	char	**ret;
-	int		i;
-
-	if (content == NULL || count < 0)
-		return (NULL);
-	ret = malloc(sizeof(char *) * (count + 1));
-	i = -1;
-	while (++i < count)
-		ret[i] = array[i];
-	ret[i] = content;
-	if (count != 0)
-		free(array);
-	return (ret);
-}
-
-int	fill_nodes(t_node *node, t_lem *l, int j)
-{
-	int	i;
-
-	i = 0;
-	while (l->lines[j][i] != ' ')
-		i++;
-	if (!i || !(node[j].name = malloc(i + 1)))
-		return (0);
-	ft_strncpy(node[j].name, l->lines[j], i);
-	node[j].name[i] = '\0';
-	node->distance = (j == l->start) ? 0 : INT_MAX;
-	node->open = 1;
-	node->parent = -1;
-	node->start = (j == l->start) ? 1 : 0;
-	node->end = (j == l->end) ? 1 : 0;
-	node->links = malloc(sizeof(int));
-	node->links[0] = -1;
-	return (1);
-}
-
-void	add_link(t_node *node, int j)
-{
-	int	i;
-	int	*links;
-
-	i = 0;
-	while (node->links[i] != -1)
-		i++;
-	links = malloc(sizeof(int) * (i + 2));
-	i = -1;
-	while (node->links[++i] != -1)
-		links[i] = node->links[i];
-	links[i++] = j;
-	links[i] = -1;
-	free(node->links);
-	node->links = links;
-}
-
-int	link_nodes(t_node *nodes, t_lem *l, char *line)
-{
-	int		i;
-	int		j;
-	char	**split;
-
-	i = 0;
-	split = malloc(sizeof(char *) * 2);
-	while (line[i] != '-')
-		i++;
-	if (line[i] == '\0' || line[i + 1] == '\0')
-		return (0);
-	split[0] = ft_strsub(line, 0, i++);
-	split[1] = ft_strsub(line, i, ft_strlen(line));
-	i = 0;
-	j = -1;
-	while (i < l->rooms)
-	{
-		if (ft_strcmp(nodes[i].name, split[0]) == 0)
-			while (++j < l->rooms)
-				if (ft_strcmp(nodes[j].name, split[1]) == 0)
-					add_link(&nodes[i], j);
-		i++;
-	}
-	return ((i == l->rooms) ? 0 : 1);
-}
-
-t_node *create_nodes(t_lem *l)
-{
-	int		i;
-	t_node	*nodes;
-	int		j;
-
-	i = -1;
-	while (++i < l->count)
-		if (ft_strchr(l->lines[i], '-'))
-			break ;
-	if (i == l->count)
-		return (NULL);
-	l->rooms = i;
-	nodes = malloc(sizeof(t_node) * (i + 1));
-	j = -1;
-	while (++j < i)
-		if (!(fill_nodes(nodes, l, j)))
-			return (NULL);
-	while (i < l->count)
-		if (!(link_nodes(nodes, l, l->lines[i++])))
-			return (NULL);
-	return (nodes);
-}
-
 char	**build_info(int fd, t_lem *lem)
 {
 	char	*line;
@@ -155,11 +48,45 @@ int	get_ants(int fd)
 	return (ft_atoi(line));
 }
 
-/*print_node(t_node *node)
+void print_node(t_node *node, int rooms)
 {
+	int i = 0;
 
+	while (i < rooms)
+	{
+	ft_printf("name: %s\ndistance = %d\nstart = %d\nend = %d\n", node[i].name, node[i].distance, node[i].start, node[i].end);
+//	if (node[i].start == 0)
+//		ft_printf("parent = %s\n",  node[node[i].parent].name);
+	ft_putstr ("links = ");
+	int j = 0;
+	while (node[i].links[j] != -1)
+	{
+		ft_putstr(node[node[i].links[j++]].name);
+		ft_putchar(',');
+	}
+	ft_putchar('\n');
+	ft_putchar('\n');
+	i++;
+	}
+}
 
-}*/
+void	free_all(t_lem *l, t_node *n)
+{
+	int	i;
+
+	i = 0;
+	while (i < l->route_no)
+		free(l->routes[i++]);
+	free(l->routes);
+	i = 0;
+	while (i < l->rooms)
+	{
+		free(n[i].name);
+		free(n[i].links);
+		i++;
+	}
+	free(n);
+}
 
 int main(int ac, char **av)
 {
@@ -176,5 +103,10 @@ int main(int ac, char **av)
 		error_exit();
 	if (!(lem.lines = build_info(fd, &lem)))
 		error_exit();
-	nodes = create_nodes(&lem);
+	if (!(nodes = create_nodes(&lem)))
+		error_exit();
+	if (!(lem_in(nodes, &lem)))
+		error_exit();
+	print_paths(nodes, &lem);
+	free_all(&lem, nodes);
 }

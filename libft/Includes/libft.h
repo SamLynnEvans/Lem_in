@@ -34,6 +34,7 @@ typedef struct		s_list
 
 
 int					ft_abs(int num);
+char				**ft_add_charpointer(char **array, char *content, int count);
 void				ft_put_inta(int *arr, int len);
 int					ft_atoi_base(char *str, int base);
 int					ft_numlen(long long num, int base, size_t size);

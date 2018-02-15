@@ -5,7 +5,7 @@ DEPS = includes/lem_in.h
 
 SRC_PATH = src
 
-SRC_NAME = main.c
+SRC_NAME = main.c lem_in.c path_printer.c build_nodes.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -29,11 +29,11 @@ library :
 	make -C $(LIB)
 
 $(NAME) : $(OBJ) $(DEPS)
-	gcc -o $@ $(OBJ) $(LIB)/$(LIBA)
+	gcc -o $@ $(OBJ) $(LIB)/$(LIBA) -g
 
 $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
 	@mkdir -p $(OBJ_PATH)
-	@gcc $(FLAGS) -o $@ -c $< $(INCLUDES)
+	@gcc $(FLAGS) -o $@ -c $< $(INCLUDES) -g
 
 clean :
 	make clean -C $(LIB)

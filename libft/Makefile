@@ -23,6 +23,7 @@ ft_printf/unicode.c \
 ft_printf/fd.c \
 libft/ft_atoi.c \
 libft/ft_bzero.c \
+libft/ft_add_charpointer.c \
 libft/ft_put_inta.c \
 libft/ft_intdebug.c \
 libft/ft_isalnum.c \

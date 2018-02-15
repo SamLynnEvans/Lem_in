@@ -22,9 +22,10 @@ void	ft_put_inta(int *arr, int len)
 	ft_putchar('{');
 	while (i < len)
 	{
-		ft_putnbr(arr[i++]);
+		ft_putnbr(arr[i]);
 		if (i + 1 < len)
 			ft_putstr(", ");
+		i++;
 	}
 	ft_putchar('}');
 }
