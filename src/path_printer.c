@@ -35,9 +35,9 @@ int		move_ants(t_lem *l, int a[l->ants][2], t_node *n, int moving_ants)
 			if (first++)
 				ft_putchar(' ');
 			ft_printf("L%d-%s", i + 1, n[l->routes[a[i][0]][a[i][1]]].name);
-			a[i][1]++;
+			a[i][1]--;
 			ret = 1;
-			if (a[i][1] == l->routes[a[i][0]][0])
+			if (a[i][1] == 1)
 				a[i][0] = -1;
 			i++;
 		}
@@ -47,16 +47,10 @@ int		move_ants(t_lem *l, int a[l->ants][2], t_node *n, int moving_ants)
 	return (ret);
 }
 
-void	set_ants(int ant_no, int ants[ant_no][2])
+void	set_ant(int dist, int ants[2], int j)
 {
-	int	i;
-
-	i = 0;
-	while (i < ant_no)
-	{
-		ants[i][0] = -1;
-		ants[i++][1] = 2;
-	}
+	ants[0] = j;
+	ants[1] = dist - 1;
 }
 
 void	print_paths(t_node *n, t_lem *l)
@@ -67,7 +61,7 @@ void	print_paths(t_node *n, t_lem *l)
 
 	print_info(l);
 	i = 0;
-	set_ants(l->ants, a);
+//	set_ants(l->ants, a);
 	while (i < l->ants)
 	{
 		j = 0;
@@ -75,11 +69,11 @@ void	print_paths(t_node *n, t_lem *l)
 		while (j < l->route_no && i < l->ants)
 		{
 			if (j == 0)
-				a[i++][0] = j;
+				set_ant(l->routes[j][0], a[i++], j);
 			else if (l->routes[j][0] == l->routes[0][0])
-				a[i++][0] = j;
+				set_ant(l->routes[j][0], a[i++], j);
 			else if (l->routes[j][0] - l->routes[0][0] < l->ants - i - (j - 1))
-				a[i++][0] = j;
+				set_ant(l->routes[j][0], a[i++], j);
 			j++;
 		}
 	}

@@ -17,15 +17,14 @@ int	*get_path(t_node *n)
 		i = n[i].parent;
 		count++;
 	}
-	path = malloc(sizeof(int) * (count + 2));
-	path[0] = count + 2;
+	path = malloc(sizeof(int) * (count + 1));
+	path[0] = count + 1;
 	i = 1;
 	while (n[j].start != 1)
 	{
 		path[i++] = j;
 		j = n[j].parent;
 	}
-	path[i++] = j;
 	return (path);
 }
 
@@ -61,7 +60,7 @@ void	reset_nodes(t_node *n, t_lem *l)
 	while (i < l->route_no)
 	{
 		j = 2;
-		while (j < l->routes[i][0] - 1)
+		while (j < l->routes[i][0] - 2)
 			n[l->routes[i][j++]].open = 0;
 		i++;
 	}
