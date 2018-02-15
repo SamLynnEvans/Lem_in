@@ -62,7 +62,7 @@ int	link_nodes(t_node *nodes, t_lem *l, char *line)
 				{
 					add_link(&nodes[i], j);
 					add_link(&nodes[j], i);
-					return (1);
+					return ((i == j) ? 0 : 1);
 				}
 	return (0);
 }
