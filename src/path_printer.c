@@ -37,7 +37,7 @@ int		move_ants(t_lem *l, int a[l->ants][2], t_node *n, int moving_ants)
 			ft_printf("L%d-%s", i + 1, n[l->routes[a[i][0]][a[i][1]]].name);
 			a[i][1]--;
 			ret = 1;
-			if (a[i][1] == 1)
+			if (a[i][1] == 0)
 				a[i][0] = -1;
 			i++;
 		}
@@ -50,7 +50,7 @@ int		move_ants(t_lem *l, int a[l->ants][2], t_node *n, int moving_ants)
 void	set_ant(int dist, int ants[2], int j)
 {
 	ants[0] = j;
-	ants[1] = dist - 1;
+	ants[1] = dist - 2;
 }
 
 void	print_paths(t_node *n, t_lem *l)
