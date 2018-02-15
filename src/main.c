@@ -73,12 +73,17 @@ int main(int ac, char **av)
 	t_lem	lem;
 
 	if (ac != 2)
-		error_exit();
-	fd = open(av[1], O_RDONLY);
-	if (fd == -1 || fd == 0)
-		error_exit();
-	if (!(lem.ants = get_ants(fd)))
-		error_exit();
+	{
+		if (!(lem.ants = get_ants(0)))
+			error_exit();
+		fd = 0;
+	}
+	else
+	{
+		fd = open(av[1], O_RDONLY);
+		if (!(lem.ants = get_ants(fd)))
+			error_exit();
+	}
 	if (!(lem.lines = build_info(fd, &lem)))
 		error_exit();
 	if (!(nodes = create_nodes(&lem)))

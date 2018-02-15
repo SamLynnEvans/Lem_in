@@ -67,7 +67,7 @@ void	reset_nodes(t_node *n, t_lem *l)
 	}
 }
 
-int	lem_in(t_node *n, t_lem *l)
+int		lem_in(t_node *n, t_lem *l)
 {
 	l->route_no = 0;
 	while (l->route_no < l->ants && djikstra(n , l))
@@ -78,22 +78,3 @@ int	lem_in(t_node *n, t_lem *l)
 	}
 	return ((l->route_no > 0) ? 1 : 0);
 }
-
-/*
-
-	int i;
-	int	j;
-
-	i = 0;
-	while (i < l->route_no)
-	{
-		j = 1;	
-		while (j < l->routes[i][0])
-		{
-			ft_putstr(n[l->routes[i][j++]].name);
-			ft_putstr(", ");
-		}
-		ft_putchar('\n');
-		i++;
-	}
-*/
