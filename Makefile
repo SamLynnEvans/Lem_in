@@ -5,7 +5,7 @@ DEPS = includes/lem_in.h
 
 SRC_PATH = src
 
-SRC_NAME = main.c lem_in.c path_printer.c build_nodes.c
+SRC_NAME = main.c lem_in.c path_printer.c build_nodes.c djikstra.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

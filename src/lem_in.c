@@ -1,54 +1,5 @@
 #include "lem_in.h"
 
-void	evaluate_node(t_node *n, int i)
-{
-	int	j;
-	int	link;
-
-	j = 0;
-	while (n[i].links[j] != -1)
-	{
-		link = n[i].links[j];
-		if (n[link].open == 1 &&
-		n[link].distance > n[i].distance + 1)
-		{
-			n[link].distance = n[i].distance + 1;
-			n[link].parent = i;
-		}
-		j++;
-	}
-	n[i].open = 0;
-}
-
-int	djikstra(t_node *n, t_lem *l)
-{
-	int	i;
-	int	d_min;
-	int	closest;
-	int	all_close;
-
-	closest = 0;
-	while (1)
-	{
-		i = -1; 
-		d_min = INT_MAX;
-		all_close = 1;
-		while (++i < l->rooms)
-		{
-			if (n[i].open)
-				all_close = 0;
-			if (n[i].open && d_min > n[i].distance)
-			{
-				d_min = n[i].distance;
-				closest = i;
-			}
-		}
-		if (d_min == INT_MAX)
-			return (all_close == 1) ? 1 : 0;
-		evaluate_node(n, closest);
-	}
-}
-
 int	*get_path(t_node *n)
 {
 	int	i;
@@ -78,7 +29,7 @@ int	*get_path(t_node *n)
 	return (path);
 }
 
-int	**get_route(t_node *n, t_lem *l)
+int	**add_route(t_node *n, t_lem *l)
 {
 	int	**routes;
 	int	i;
@@ -88,7 +39,8 @@ int	**get_route(t_node *n, t_lem *l)
 	while (++i < l->route_no)
 		routes[i] = l->routes[i];
 	routes[i] = get_path(n);
-	free(l->routes);
+	if (l->route_no != 0)
+		free(l->routes);
 	return (routes);
 }
 
@@ -120,24 +72,9 @@ int	lem_in(t_node *n, t_lem *l)
 	l->route_no = 0;
 	while (l->route_no < l->ants && djikstra(n , l))
 	{
-		l->routes = get_route(n, l);
+		l->routes = add_route(n, l);
 		l->route_no++;
 		reset_nodes(n, l);
-	}
-	int i;
-	int	j;
-
-	i = 0;
-	while (i < l->route_no)
-	{
-		j = 1;	
-		while (j < l->routes[i][0])
-		{
-			ft_putstr(n[l->routes[i][j++]].name);
-			ft_putstr(", ");
-		}
-		ft_putchar('\n');
-		i++;
 	}
 	return ((l->route_no > 0) ? 1 : 0);
 }

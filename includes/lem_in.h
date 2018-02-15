@@ -29,8 +29,9 @@ typedef struct	s_lem
 	int		**routes;
 }				t_lem;
 
-int		lem_in(t_node *nodes, t_lem *lem); 
-void	print_paths(t_node *nodes, t_lem *lem);
-t_node	*create_nodes(t_lem *l);
+int				lem_in(t_node *nodes, t_lem *lem); 
+void			print_paths(t_node *nodes, t_lem *lem);
+t_node			*create_nodes(t_lem *l);
+int				djikstra(t_node *n, t_lem *l);
 
 #endif

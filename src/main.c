@@ -6,6 +6,24 @@ void	error_exit(void)
 	exit(1);
 }
 
+void	free_all(t_lem *l, t_node *n)
+{
+	int	i;
+
+	i = 0;
+	while (i < l->route_no)
+		free(l->routes[i++]);
+	free(l->routes);
+	i = 0;
+	while (i < l->rooms)
+	{
+		free(n[i].name);
+		free(n[i].links);
+		i++;
+	}
+	free(n);
+}
+
 char	**build_info(int fd, t_lem *lem)
 {
 	char	*line;
@@ -46,46 +64,6 @@ int	get_ants(int fd)
 	if (line[i] != '\0')
 		return (0);
 	return (ft_atoi(line));
-}
-
-void print_node(t_node *node, int rooms)
-{
-	int i = 0;
-
-	while (i < rooms)
-	{
-	ft_printf("name: %s\ndistance = %d\nstart = %d\nend = %d\n", node[i].name, node[i].distance, node[i].start, node[i].end);
-//	if (node[i].start == 0)
-//		ft_printf("parent = %s\n",  node[node[i].parent].name);
-	ft_putstr ("links = ");
-	int j = 0;
-	while (node[i].links[j] != -1)
-	{
-		ft_putstr(node[node[i].links[j++]].name);
-		ft_putchar(',');
-	}
-	ft_putchar('\n');
-	ft_putchar('\n');
-	i++;
-	}
-}
-
-void	free_all(t_lem *l, t_node *n)
-{
-	int	i;
-
-	i = 0;
-	while (i < l->route_no)
-		free(l->routes[i++]);
-	free(l->routes);
-	i = 0;
-	while (i < l->rooms)
-	{
-		free(n[i].name);
-		free(n[i].links);
-		i++;
-	}
-	free(n);
 }
 
 int main(int ac, char **av)
