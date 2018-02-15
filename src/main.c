@@ -94,5 +94,4 @@ int main(int ac, char **av)
 		error_exit();
 	print_paths(nodes, &lem);
 	free_all(&lem, nodes);
-	sleep(3);
 }

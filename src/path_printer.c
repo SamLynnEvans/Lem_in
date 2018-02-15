@@ -5,7 +5,7 @@ void	print_info(t_lem *l)
 	int	i;
 
 	i = 0;
-	ft_printf("##start\n%s\n##end\n%s\n", l->lines[l->start], l->lines[l->end]);
+	ft_printf("%d\n##start\n%s\n##end\n%s\n", l->ants, l->lines[l->start], l->lines[l->end]);
 	while (i < l->count)
 	{
 		if (i != l->start && i != l->end)
