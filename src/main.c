@@ -60,11 +60,18 @@ int	get_ants(int fd)
 
 	i = 0;
 	if (get_next_line(fd, &line) != 1)
+	{
+		free(line);
 		return (0);
+	}
 	while (ft_isdigit(line[i]))
 		i++;
 	if (line[i] != '\0')
+	{
+		free(line);
 		return (0);
+	}
+	free(line);
 	return (ft_atoi(line));
 }
 

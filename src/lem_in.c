@@ -76,9 +76,9 @@ int		lem_in(t_node *n, t_lem *l)
 		l->route_no++;
 		reset_nodes(n, l);
 	}
-
-
-
+	return ((l->route_no > 0) ? 1 : 0);
+}
+/*
 	int i;
 	int	j;
 
@@ -94,6 +94,4 @@ int		lem_in(t_node *n, t_lem *l)
 		ft_putchar('\n');
 		i++;
 	}
-
-	return ((l->route_no > 0) ? 1 : 0);
-}
+*/
