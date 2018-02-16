@@ -48,7 +48,7 @@ int		move_ants(t_lem *l, int a[l->ants][2], t_node *n, int moving_ants)
 void	set_ant(int dist, int ants[2], int j)
 {
 	ants[0] = j;
-	ants[1] = dist - 2;
+	ants[1] = dist;
 }
 
 void	print_paths(t_node *n, t_lem *l)
