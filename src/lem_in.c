@@ -25,7 +25,6 @@ int	*get_path(t_node *n)
 		path[i++] = j;
 		j = n[j].parent;
 	}
-	path[i++] = j;
 	return (path);
 }
 

@@ -1,8 +1,10 @@
 INCLUDES = -I../libft/Includes/ -Iminilibx/
 
-SRC = main.c build_rooms.c draw.c
+SRC = main.c build_rooms.c draw.c lines.c
 
 NAME = vis
+
+DEPS = vis.h
 
 OBJ = $(SRC:.c=.o)
 
@@ -12,8 +14,8 @@ VFLAGS = -framework Appkit -framework OpenGL
 
 all : library $(NAME)
 
-$(NAME) : $(OBJ)
-	gcc -o $@ $^ $(INCLUDES) $(FLAGS) ../libft/libft.a minilibx/libmlx.a $(VFLAGS)
+$(NAME) : $(OBJ) $(DEPS)
+	gcc -o $@ $(OBJ) $(INCLUDES) $(FLAGS) ../libft/libft.a minilibx/libmlx.a $(VFLAGS)
 
 %.o : %.c
 	gcc -o $@ -c $^ $(INCLUDES) $(FLAGS)

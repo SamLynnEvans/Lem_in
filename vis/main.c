@@ -53,20 +53,21 @@ int	get_ants(void)
 		free(line);
 		return (0);
 	}
+	i = ft_atoi(line);
 	free(line);
-	return (ft_atoi(line));
+	return (i);
 }
 
 int main()
 {
 	t_vis	v;
-	t_node *nodes;
 
 	if (!(v.ants = get_ants()))
 		error_exit();
 	if (!(build_info(&v)))
 		error_exit();
-	if (!(nodes = create_nodes(&v)))
+	if (!(v.n = create_nodes(&v)))
 		error_exit();
-	visualiser(nodes, &v);
+	ft_putstr("entered");
+	visualiser(&v);
 }

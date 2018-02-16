@@ -5,7 +5,7 @@ DEPS = includes/lem_in.h
 
 SRC_PATH = src
 
-SRC_NAME = main.c lem_in.c path_printer.c build_nodes.c djikstra.c
+SRC_NAME = main.c lem_in.c path_printer.c build_nodes.c djikstra.c read.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -29,11 +29,12 @@ library :
 	make -C $(LIB)
 
 $(NAME) : $(OBJ) $(DEPS)
-	gcc -o $@ $(OBJ) $(LIB)/$(LIBA) -g
+	gcc -o $@ $(OBJ) $(LIB)/$(LIBA) 
+#-fsanitize=address -ggdb
 
 $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
 	@mkdir -p $(OBJ_PATH)
-	@gcc $(FLAGS) -o $@ -c $< $(INCLUDES) -g
+	@gcc $(FLAGS) -o $@ -c $< $(INCLUDES)
 
 clean :
 	make clean -C $(LIB)

@@ -39,6 +39,13 @@ void	add_link(t_node *node, int j)
 	node->links = links;
 }
 
+void	free_split(char **split)
+{
+	free(split[0]);
+	free(split[1]);
+	free(split);
+}
+
 int	link_nodes(t_node *nodes, t_lem *l, char *line)
 {
 	int		i;
@@ -49,8 +56,6 @@ int	link_nodes(t_node *nodes, t_lem *l, char *line)
 	split = malloc(sizeof(char *) * 2);
 	while (line[i] != '-')
 		i++;
-	if (line[i] == '\0' || line[i + 1] == '\0')
-		return (0);
 	split[0] = ft_strsub(line, 0, i++);
 	split[1] = ft_strsub(line, i, ft_strlen(line));
 	i = -1;
@@ -62,8 +67,10 @@ int	link_nodes(t_node *nodes, t_lem *l, char *line)
 				{
 					add_link(&nodes[i], j);
 					add_link(&nodes[j], i);
+					free_split(split);
 					return ((i == j) ? 0 : 1);
 				}
+	free_split(split);
 	return (0);
 }
 
