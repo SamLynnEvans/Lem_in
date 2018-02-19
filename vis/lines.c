@@ -15,7 +15,7 @@
 void	put_pixel_img(t_vis *v, int x, int y, int color)
 {
 	int	pos;
-
+	
 	pos = (x * 4) + (y * v->sl);
 	v->data[pos++] = color;
 	v->data[pos++] = color >> 8;
@@ -119,7 +119,7 @@ int	put_room(t_vis *v, int i)
 	v->size = 35;
 	p1[X] = (v->size + 8) * v->n[i].coords[0] + 1;
 	p1[Y] = (v->size + 16) * v->n[i].coords[1] + 1;
-//	v->n[i].put = (p1[X] * 4) + p1[Y] * v->sl;
+	v->n[i].put = (p1[X] * 4) + p1[Y] * v->sl;
 //	mlx_string_put(v->mlx, v->win, p1[X] - 10, p1[Y] - 10, 0xFFFFFF, v->n[i].name);
 	p2[X] = (v->size + 8) * v->n[i].coords[0] + 1 + v->size;
 	p2[Y] = (v->size + 16) * v->n[i].coords[1] + 1;

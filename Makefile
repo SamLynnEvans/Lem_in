@@ -29,8 +29,7 @@ library :
 	make -C $(LIB)
 
 $(NAME) : $(OBJ) $(DEPS)
-	gcc -o $@ $(OBJ) $(LIB)/$(LIBA) 
-#-fsanitize=address -ggdb
+	gcc -o $@ $(OBJ) $(LIB)/$(LIBA) -fsanitize=address
 
 $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
 	@mkdir -p $(OBJ_PATH)

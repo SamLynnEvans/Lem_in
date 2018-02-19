@@ -16,7 +16,7 @@ typedef struct	s_node
 	int		coords[2];
 	int		end;
 	int		start;
-//	int		put;
+	int		put;
 }				t_node;
 
 typedef struct	s_emo

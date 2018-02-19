@@ -43,8 +43,8 @@ char	**read_lines(int fd, t_emo *emo)
 		lines = ft_add_charpointer(lines, line, emo->y_max);
 		emo->y_max++;
 	}
-		i = 0;
-		while (lines[0][i])
+	i = 0;
+	while (lines[0][i])
 		{
 			if (lines[0][i++] == ' ')
 			emo->x_max++;

@@ -41,7 +41,7 @@ int	start_game(t_vis *v)
 		i++;
 	}
 	mlx_clear_window(v->mlx, v->win);
-	print_emoji(v->data, v->sl, v->e, 0);
+	print_emoji(v->data, v->sl, v->e, v->n[1].put);
 	mlx_put_image_to_window(v->mlx, v->win, v->img, 5, 100);
 	return (1);
 }
@@ -53,7 +53,7 @@ int		begin_game(int key, t_vis *v)
 	ft_intdebug(key, "key");
 		if (key == 53)
 			exit(1);
-	if (key == 36 && first == 0)
+	if (key == 36)
 	{
 		start_game(v);
 		first = 1;
@@ -63,11 +63,17 @@ int		begin_game(int key, t_vis *v)
 
 void	visualiser(t_vis *v)
 {
+	int	i;
+	i = 0;
+	while (i < v->rooms)
+		free(v->lines[i++]);
+	free(v->lines);
 	v->mlx = mlx_init();
 	v->win = mlx_new_window(v->mlx, 1000, 900, "ANTS");
-	mlx_key_hook(v->win, begin_game, v);
-	print_start(v);
+//	mlx_key_hook(v->win, begin_game, v);
+//	print_start(v);
 //	print_toscreen(v);
+	start_game(v);
 	mlx_loop(v->mlx);
 //	ft_putstr("poo");
 }

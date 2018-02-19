@@ -30,7 +30,7 @@ void	add_link(t_node *node, int j)
 	i = 0;
 	while (node->links[i] != -1)
 		i++;
-	links = malloc(sizeof(int) * (i + 3));
+	links = malloc(sizeof(int) * (i + 4));
 	i = -1;
 	while (node->links[++i] != -1)
 		links[i] = node->links[i];
@@ -65,9 +65,12 @@ int	link_nodes(t_node *nodes, t_vis *v, char *line)
 					add_link(&nodes[j], i);
 					return ((i == j) ? 0 : 1);
 				}
+	free(split[0]);
+	free(split[1]);
+	free(split);
 	return (0);
 }
-/*
+
 void	print_nodes(t_node *n, t_vis *v)
 {
 	int	i;
@@ -90,7 +93,7 @@ void	print_nodes(t_node *n, t_vis *v)
 		i++;
 	}
 }
-*/
+
 t_node *create_nodes(t_vis *v)
 {
 	int		i;
@@ -112,6 +115,6 @@ t_node *create_nodes(t_vis *v)
 	while (i < v->count)
 		if (!(link_nodes(nodes, v, v->lines[i++])))
 			return (NULL);
-//	print_nodes(nodes, v);
+	print_nodes(nodes, v);
 	return (nodes);
 }
