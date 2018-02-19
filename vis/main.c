@@ -62,6 +62,7 @@ int main()
 {
 	t_vis	v;
 
+	v.e = get_emo();
 	if (!(v.ants = get_ants()))
 		error_exit();
 	if (!(build_info(&v)))

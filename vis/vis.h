@@ -16,7 +16,15 @@ typedef struct	s_node
 	int		coords[2];
 	int		end;
 	int		start;
+//	int		put;
 }				t_node;
+
+typedef struct	s_emo
+{
+	int **emoji;
+	int	x_max;
+	int	y_max;
+}				t_emo;
 
 typedef struct	s_vis
 {
@@ -34,12 +42,16 @@ typedef struct	s_vis
 	int		endian;
 	int		bpp;
 	int		size;
-	t_node *n;
+	t_node	*n;
+	t_emo	*e;
 }				t_vis;
 
-
-t_node *create_nodes(t_vis *v);
+t_emo	*get_emo(void);
+t_node	*create_nodes(t_vis *v);
 void	visualiser(t_vis *v);
 int		put_room(t_vis *v, int i);
+void	error_exit(void);
+void	put_pixel_img(t_vis *v, int x, int y, int color);
+void	print_emoji(char *data, int sl, t_emo *e, int pos);
 
 #endif

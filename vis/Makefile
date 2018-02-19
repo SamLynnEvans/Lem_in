@@ -1,6 +1,6 @@
 INCLUDES = -I../libft/Includes/ -Iminilibx/
 
-SRC = main.c build_rooms.c draw.c lines.c
+SRC = main.c build_rooms.c draw.c lines.c emo.c
 
 NAME = vis
 
@@ -8,7 +8,7 @@ DEPS = vis.h
 
 OBJ = $(SRC:.c=.o)
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
 
 VFLAGS = -framework Appkit -framework OpenGL
 

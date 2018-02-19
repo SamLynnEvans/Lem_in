@@ -32,7 +32,7 @@ int	start_game(t_vis *v)
 	int	i;
 
 	i = 0;
-	v->img = mlx_new_image(v->mlx, 1000, 700);
+	v->img = mlx_new_image(v->mlx, 950, 800);
 	v->data = mlx_get_data_addr(v->img, &(v->bpp), &(v->sl), &(v->endian));
 	while (i < v->rooms)
 	{
@@ -41,6 +41,7 @@ int	start_game(t_vis *v)
 		i++;
 	}
 	mlx_clear_window(v->mlx, v->win);
+	print_emoji(v->data, v->sl, v->e, 0);
 	mlx_put_image_to_window(v->mlx, v->win, v->img, 5, 100);
 	return (1);
 }
@@ -63,7 +64,7 @@ int		begin_game(int key, t_vis *v)
 void	visualiser(t_vis *v)
 {
 	v->mlx = mlx_init();
-	v->win = mlx_new_window(v->mlx, 1000, 700, "ANTS");
+	v->win = mlx_new_window(v->mlx, 1000, 900, "ANTS");
 	mlx_key_hook(v->win, begin_game, v);
 	print_start(v);
 //	print_toscreen(v);
