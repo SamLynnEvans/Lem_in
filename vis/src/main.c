@@ -9,16 +9,6 @@ void	error_exit(int a)
 	exit(1);
 }
 
-int	start_end(t_vis *v, char *line, int start)
-{
-	if (start)
-		v->start = v->count;
-	else
-		v->end = v->count;
-	free(line);
-	return (1);
-}
-
 int main(int ac, char **av)
 {
 	t_vis	v;
