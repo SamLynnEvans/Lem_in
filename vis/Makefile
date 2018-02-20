@@ -16,7 +16,7 @@ SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAME))
 
 OBJ = $(addprefix $(OBJ_PATH)/, $(OBJ_NAME))
 
-FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -Wall -Werror -Wextra
 
 VFLAGS = -framework Appkit -framework OpenGL
 
@@ -37,3 +37,9 @@ clean :
 	make clean -C minilibx/
 	make clean -C ../libft/
 	rm -fr $(OBJ_PATH)
+
+fclean : clean
+	make fclean -C ../libft/
+	rm -f $(NAME)
+
+re : fclean all

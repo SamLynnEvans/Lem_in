@@ -81,44 +81,6 @@ void	print_ants(t_vis *v)
 		print_emoji(v->data, v->sl, &(v->e[ant % 15]), v->n[0].put);
 }
 
-char	*zero_case(void)
-{
-	char	*dst;
-
-	dst = malloc(2);
-	dst[0] = '0';
-	dst[1] = '\0';
-	return (dst);
-}
-
-char	*ft_itoa(int num)
-{
-	char	*dst;
-	int		n;
-	int		count;
-	int		sign;
-
-	num *= (num < 0) ? -1 : 1;
-	sign = (num < 0) ? -1 : 1;
-	if (num == 0)
-		return (zero_case());
-	count = 0;
-	n = num;
-	while (n && ++count)
-		n /= 10;
-	count += (sign == -1) ? 1 : 0;
-	dst = malloc(count + 1);
-	dst[count--] = '\0';
-	while (num) 
-	{
-		dst[count--] = num % 10 + '0';
-		num /= 10;
-	}
-	if (sign == -1)
-		dst[count] = '-';
-	return (dst);
-}
-
 void	print_title(t_vis *v)
 {
 	char *num;
@@ -230,10 +192,7 @@ void	visualiser(t_vis *v)
 	v->height = (v->size + 20) * (v->height) + v->size + 20;
 	v->width = (v->size + 8) * (v->width) + v->size + 10;
 	if (v->width > 1200 || v->height > 700)
-	{
-		ft_putstr("map too large");
-		error_exit();
-	}
+		error_exit(1);
 	v->mlx = mlx_init();
 	v->win = mlx_new_window(v->mlx, 1200, 700, "ANTS");
 	mlx_key_hook(v->win, begin_game, v);

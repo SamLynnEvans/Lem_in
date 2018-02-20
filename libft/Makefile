@@ -22,6 +22,7 @@ ft_printf/print_numbers.c \
 ft_printf/unicode.c \
 ft_printf/fd.c \
 libft/ft_atoi.c \
+libft/ft_str_to_intdata.c \
 libft/ft_bzero.c \
 libft/ft_add_charpointer.c \
 libft/ft_put_inta.c \

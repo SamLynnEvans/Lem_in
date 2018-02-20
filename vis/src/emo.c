@@ -53,29 +53,6 @@ char	**read_lines(int fd, t_emo *emo)
 	return (lines);
 }
 
-int	*str_to_intdata(char *str, int size)
-{
-	int *data;
-	int	i;
-
-	i = 0;
-	data = malloc(sizeof(int) * size);
-	while (*str)
-	{
-		if (ft_isdigit(*str) || (*str == '-' && ft_isdigit(*(str + 1))))
-		{
-			if (i > size)
-				return (NULL);
-			data[i++] = ft_atoi(str);
-			while (ft_isdigit(*str) || *str == '-')
-				str++;
-		}
-		else
-			str++;
-	}
-	return (data);
-}
-
 void	set_emojis(char emojis[25][30])
 {
 	ft_strcpy(emojis[0], "emoji/glasses");
@@ -114,7 +91,7 @@ t_emo	*get_emo(void)
 	{
 		fd = open(emojis[i], O_RDONLY);
 		if (fd == -1)
-			error_exit();
+			error_exit(0);
 		lines = read_lines(fd, e + i);
 		e[i].emoji = malloc(sizeof(int *) * e[i].y_max + 1);
 		j = 0;

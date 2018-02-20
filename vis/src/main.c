@@ -1,9 +1,22 @@
 #include "vis.h"
 
-void	error_exit(void)
+void	error_exit(int a)
 {
-	ft_putstr("ERROR\n");
+	if (a == 0)
+		ft_putstr("ERROR\n");
+	if (a == 1)
+		ft_putstr("map too large\n");
 	exit(1);
+}
+
+int	start_end(t_vis *v, char *line, int start)
+{
+	if (start)
+		v->start = v->count;
+	else
+		v->end = v->count;
+	free(line);
+	return (1);
 }
 
 int	build_info(t_vis *v, int fd)
@@ -16,23 +29,10 @@ int	build_info(t_vis *v, int fd)
 	v->count = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (ft_strcmp("##start", line) == 0)
-		{
-			sa[0]++;
-			v->start = v->count;
-			free(line);
-		}
+		if (!(ft_strcmp("##start", line)))
+			sa[0] += start_end(v, line, 1);
 		else if (ft_strcmp("##end", line) == 0)
-		{
-			sa[1]++;
-			v->end = v->count;
-			free(line);
-		}
-		else if (line[0] == '\0')
-		{
-			free(line);
-			break ;
-		}
+			sa[1] += start_end(v, line, 0);
 		else if (line[0] != '#')
 		{
 			v->lines = ft_add_charpointer(v->lines, line, v->count);
@@ -93,12 +93,12 @@ int main(int ac, char **av)
 	else
 		fd = 0;
 	if (!(v.ants = get_ants(fd)))
-		error_exit();
+		error_exit(0);
 	if (!(build_info(&v, fd)))
-		error_exit();
+		error_exit(0);
 	if (!(v.n = create_nodes(&v)))
-		error_exit();
+		error_exit(0);
 	if (!(v.moves = get_moves(fd, &v)))
-		error_exit();
+		error_exit(0);
 	visualiser(&v);
 }

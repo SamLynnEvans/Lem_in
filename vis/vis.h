@@ -57,7 +57,7 @@ t_emo	*get_emo(void);
 t_node	*create_nodes(t_vis *v);
 void	visualiser(t_vis *v);
 int		put_room(t_vis *v, int i);
-void	error_exit(void);
+void	error_exit(int a);
 void	put_pixel_img(t_vis *v, int x, int y, int color);
 void	print_emoji(char *data, int sl, t_emo *e, int pos);
 
