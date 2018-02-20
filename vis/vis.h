@@ -33,6 +33,8 @@ typedef struct	s_vis
 	int		mv;
 	int		ants;
 	int		rooms;
+	int		done;
+	int		*home;
 	int		start;
 	int		end;
 	char	**lines;

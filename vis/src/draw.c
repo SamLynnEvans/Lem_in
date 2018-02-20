@@ -73,10 +73,63 @@ void	print_ants(t_vis *v)
 				break;
 		if (!v->n[j].end || !end_check)
 			print_emoji(v->data, v->sl, &(v->e[(ant - 1) % 15]), v->n[j].put);
-		end_check = (v->n[j].end) ? 1 : end_check;
+		end_check = (j == 1) ? 1 : end_check;
+		v->home[v->mv + 1] += (j == 1 && !v->done) ? 1 : 0;
 	}
+	v->home[v->mv + 1] += (v->done || v->mv == -1) ? 0 : v->home[v->mv];
 	if (ant < v->ants)
 		print_emoji(v->data, v->sl, &(v->e[ant % 15]), v->n[0].put);
+}
+
+char	*zero_case(void)
+{
+	char	*dst;
+
+	dst = malloc(2);
+	dst[0] = '0';
+	dst[1] = '\0';
+	return (dst);
+}
+
+char	*ft_itoa(int num)
+{
+	char	*dst;
+	int		n;
+	int		count;
+	int		sign;
+
+	num *= (num < 0) ? -1 : 1;
+	sign = (num < 0) ? -1 : 1;
+	if (num == 0)
+		return (zero_case());
+	count = 0;
+	n = num;
+	while (n && ++count)
+		n /= 10;
+	count += (sign == -1) ? 1 : 0;
+	dst = malloc(count + 1);
+	dst[count--] = '\0';
+	while (num) 
+	{
+		dst[count--] = num % 10 + '0';
+		num /= 10;
+	}
+	if (sign == -1)
+		dst[count] = '-';
+	return (dst);
+}
+
+void	print_title(t_vis *v)
+{
+	char *num;
+
+	mlx_string_put(v->mlx, v->win, 590, 30, 0xFFFFFF, "ANTZ");
+	mlx_string_put(v->mlx, v->win, 565, 55, 0xFFFFFF, "Turn : ");
+	mlx_string_put(v->mlx, v->win, 640, 55, 0xFFFFFF, (num = ft_itoa(v->mv + 1)));
+	free(num);
+	mlx_string_put(v->mlx, v->win, 565, 70, 0xFFFFFF, "Home : ");
+	mlx_string_put(v->mlx, v->win, 640, 70, 0xFFFFFF, (num = ft_itoa(v->home[v->mv + 1])));
+	free(num);
 }
 
 int	play_game(t_vis *v)
@@ -97,7 +150,9 @@ int	play_game(t_vis *v)
 	mlx_clear_window(v->mlx, v->win);
 	print_ants(v);
 	mlx_put_image_to_window(v->mlx, v->win, v->img, (1200 - v->width) / 2, (700 - v->height) / 2);
-	mlx_string_put(v->mlx, v->win, 570, 30, 0xFFFFFF, "ANTZ");
+	print_title(v);
+	free(v->data);
+	free(v->img);
 	return (1);
 }
 
@@ -105,13 +160,13 @@ int		begin_game(int key, t_vis *v)
 {
 	static int first = 0;
 
-	ft_intdebug(key, "key");
+	if (v->mv + 1 == v->mv_count)
+		v->done = 1;
 	if (key == 53)
 			exit(1);
-	if (key == 124 && v->mv >= -1 && first)
+	if (key == 124 && v->mv >= -1 && first && v->mv + 1 < v->mv_count)
 	{
-		if (v->mv + 1 < v->mv_count)
-			v->mv++;
+		v->mv++;
 		play_game(v);
 	}
 	if (key == 123 && v->mv >= 0)
@@ -165,6 +220,11 @@ void	visualiser(t_vis *v)
 	while (i < v->rooms)
 		free(v->lines[i++]);
 	free(v->lines);
+	v->done = 0;
+	v->home = malloc(sizeof(int) * (v->mv_count + 1));
+	i = 0;
+	while (i < v->mv_count + 1)
+		v->home[i++] = 0; 
 	v->mv = -1;
 	get_dimensions(v);
 	v->height = (v->size + 20) * (v->height) + v->size + 20;

@@ -86,7 +86,7 @@ int main(int ac, char **av)
 	t_vis	v;
 	int	fd;
 
-	ft_printf("%C\n", L'😇');
+//	ft_printf("%C\n", L'😇');
 	v.e = get_emo();
 	if (ac == 2)
 		fd = open(av[1], O_RDONLY);
@@ -96,7 +96,6 @@ int main(int ac, char **av)
 		error_exit();
 	if (!(build_info(&v, fd)))
 		error_exit();
-	ft_putstr("entered");
 	if (!(v.n = create_nodes(&v)))
 		error_exit();
 	if (!(v.moves = get_moves(fd, &v)))
