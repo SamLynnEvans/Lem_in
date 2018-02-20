@@ -50,3 +50,27 @@ int	get_ants(int fd)
 		return (0);
 	}
 	while (ft_isdigit(line[i]))
+		i++;
+	if (line[i] != '\0')
+	{
+		free(line);
+		return (0);
+	}
+	i = ft_atoi(line);
+	free(line);
+	return (i);
+}
+
+char	**get_moves(int fd, t_vis *v)
+{
+	char	**moves;
+	char	*line;
+
+	v->mv_count = 0;
+	while (get_next_line(fd, &line) > 0)
+	{
+		moves = ft_add_charpointer(moves, line, v->mv_count);
+		v->mv_count++;
+	}
+	return (moves);
+}

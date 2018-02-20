@@ -62,5 +62,8 @@ void	print_emoji(char *data, int sl, t_emo *e, int pos);
 int		play_game(t_vis *v);
 void	draw_links(t_vis *v, int i);
 void	draw_line(int p1[2], int p2[2], t_vis *v, int col);
+int		build_info(t_vis *v, int fd);
+int		get_ants(int fd);
+char	**get_moves(int fd, t_vis *v);
 
 #endif
