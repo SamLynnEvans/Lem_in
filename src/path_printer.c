@@ -69,7 +69,7 @@ void	print_paths(t_node *n, t_lem *l)
 				set_ant(l->routes[j][0], a[i++], j);
 			else if (l->routes[j][0] == l->routes[0][0])
 				set_ant(l->routes[j][0], a[i++], j);
-			else if (l->routes[j][0] - l->routes[0][0] < l->ants - i - (j - 1))
+			else if (l->routes[j][0] - l->routes[0][0] <= (l->ants - i) / j)
 				set_ant(l->routes[j][0], a[i++], j);
 			j++;
 		}
