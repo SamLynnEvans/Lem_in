@@ -17,9 +17,9 @@ void	print_emoji(char *data, int sl, t_emo *e, int pos)
 		{
 			if (e->emoji[i][j] || e->emoji[i][j + 1] || e->emoji[i][j + 2])
 			{
-			data[pos + y *sl + x] =  e->emoji[i][j + 2];
-			data[pos + y *sl + x + 2] =  e->emoji[i][j];
-			data[pos + y *sl + x + 1] =  e->emoji[i][j + 1];
+				data[pos + y *sl + x] =  e->emoji[i][j + 2];
+				data[pos + y *sl + x + 2] =  e->emoji[i][j];
+				data[pos + y *sl + x + 1] =  e->emoji[i][j + 1];
 			}
 			j+=8;
 			x+=4;
@@ -50,8 +50,6 @@ char	**read_lines(int fd, t_emo *emo)
 			emo->x_max++;
 		}
 	emo->x_max++;
-	ft_intdebug(emo->x_max, "x");
-	ft_intdebug(emo->y_max, "y");
 	return (lines);
 }
 
@@ -78,25 +76,41 @@ int	*str_to_intdata(char *str, int size)
 	return (data);
 }
 
+void	set_emojis(char emojis[25][30])
+{
+	ft_strcpy(emojis[0], "emoji/glasses");
+	ft_strcpy(emojis[1], "emoji/laugh");
+}
+
 
 t_emo	*get_emo(void)
 {
 	int	fd;
 	int	i;
+	int	j;
 	t_emo *e;
 	char **lines;
+	char emojis[25][30];
 
 	i = 0;
-	e = malloc(sizeof(t_emo));
-	fd = open("emoji/test.txt", O_RDONLY);
-	if (fd == -1)
-		error_exit();
-	lines = read_lines(fd, e);
-	e->emoji = malloc(sizeof(int *) * e->y_max + 1);
-	while (i < e->y_max)
+	set_emojis(emojis);
+	e = malloc(sizeof(t_emo) * 2);
+	while (i < 2)
 	{
-		e->emoji[i] = str_to_intdata(lines[i], e->x_max);
+		fd = open(emojis[i], O_RDONLY);
+		if (fd == -1)
+			error_exit();
+		lines = read_lines(fd, e + i);
+		e[i].emoji = malloc(sizeof(int *) * e[i].y_max + 1);
+		j = 0;
+		while (j < e[i].y_max)
+		{
+			e[i].emoji[j] = str_to_intdata(lines[j], e[i].x_max);
+			free(lines[j]);
+			j++;
+		}
 		i++;
+		free(lines);
 	}
 	return (e);
 }

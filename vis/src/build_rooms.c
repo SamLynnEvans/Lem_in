@@ -115,6 +115,6 @@ t_node *create_nodes(t_vis *v)
 	while (i < v->count)
 		if (!(link_nodes(nodes, v, v->lines[i++])))
 			return (NULL);
-	print_nodes(nodes, v);
+//	print_nodes(nodes, v);
 	return (nodes);
 }

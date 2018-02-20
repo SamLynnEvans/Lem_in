@@ -28,6 +28,11 @@ int	build_info(t_vis *v, int fd)
 			v->end = v->count;
 			free(line);
 		}
+		else if (line[0] == '\0')
+		{
+			free(line);
+			break ;
+		}
 		else if (line[0] != '#')
 		{
 			v->lines = ft_add_charpointer(v->lines, line, v->count);
@@ -62,11 +67,26 @@ int	get_ants(int fd)
 	return (i);
 }
 
+char	**get_moves(int fd, t_vis *v)
+{
+	char	**moves;
+	char	*line;
+
+	v->mv_count = 0;
+	while (get_next_line(fd, &line) > 0)
+	{
+		moves = ft_add_charpointer(moves, line, v->mv_count);
+		v->mv_count++;
+	}
+	return (moves);
+}
+
 int main(int ac, char **av)
 {
 	t_vis	v;
 	int	fd;
 
+//	ft_printf("%C\n", L'🤓');
 	v.e = get_emo();
 	if (ac == 2)
 		fd = open(av[1], O_RDONLY);
@@ -76,7 +96,10 @@ int main(int ac, char **av)
 		error_exit();
 	if (!(build_info(&v, fd)))
 		error_exit();
+	ft_putstr("entered");
 	if (!(v.n = create_nodes(&v)))
+		error_exit();
+	if (!(v.moves = get_moves(fd, &v)))
 		error_exit();
 	visualiser(&v);
 }

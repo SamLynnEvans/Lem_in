@@ -28,6 +28,9 @@ typedef struct	s_emo
 
 typedef struct	s_vis
 {
+	char	**moves;
+	int		mv_count;
+	int		mv;
 	int		ants;
 	int		rooms;
 	int		start;
