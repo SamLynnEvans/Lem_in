@@ -52,12 +52,14 @@ void	steep_line(int p1[4], int p2[4], t_vis *v, int col)
 	int dy;
 	int	p;
 	int	neg;
+	int	count;
 
+	count = 0;
 	neg = (p2[Y] - p1[Y] > 0) ? 1 : -1;
 	dx = ft_abs(p2[X] - p1[X]);
 	dy = ft_abs(p2[Y] - p1[Y]);
 	p = 2 * dx - dy;
-	while (p1[Y] < p2[Y])
+	while (count < dy)
 	{
 		if (p < 0)
 			p = p + 2 * dx;
@@ -68,6 +70,7 @@ void	steep_line(int p1[4], int p2[4], t_vis *v, int col)
 		}
 		put_pixel_img(v, p1[X] - 1, p1[Y], col);
 		p1[Y] += neg;
+		count++;
 	}
 }
 
@@ -98,11 +101,11 @@ void	draw_links(t_vis *v, int i)
 
 	j = 0;
 	p1[X] = (v->size + 8) * v->n[i].coords[0] + 1 + v->size / 2;
-	p1[Y] = (v->size + 20) * v->n[i].coords[1] + 1 + v->size / 2;
+	p1[Y] = (v->size + 20) * v->n[i].coords[1] + 16 + v->size / 2;
 	while (v->n[i].links[j] != -1)
 	{
 		p2[X] = (v->size + 8) * v->n[v->n[i].links[j]].coords[0] + 1 + v->size / 2;
-		p2[Y] = (v->size + 20) * v->n[v->n[i].links[j]].coords[1] + 1 + v->size / 2;
+		p2[Y] = (v->size + 20) * v->n[v->n[i].links[j]].coords[1] + 16 + v->size / 2;
 		if (p1[X] < p2[X])
 			draw_line(p1, p2, v, 0xFF8134);
 		else
@@ -116,21 +119,22 @@ int	put_room(t_vis *v, int i)
 	int	p1[2];
 	int	p2[2];
 
-	v->size = 35;
 	p1[X] = (v->size + 8) * v->n[i].coords[0] + 1;
-	p1[Y] = (v->size + 20) * v->n[i].coords[1] + 1;
+	p1[Y] = (v->size + 20) * v->n[i].coords[1] + 16;
 	v->n[i].put = (p1[X] * 4) + p1[Y] * v->sl;
+	//if (v->n[i].end == 1 || v->n[i].start == 1)
+//		label_room(&(v->n[i]), v);
 	p2[X] = (v->size + 8) * v->n[i].coords[0] + 1 + v->size;
-	p2[Y] = (v->size + 20) * v->n[i].coords[1] + 1;
+	p2[Y] = (v->size + 20) * v->n[i].coords[1] + 16;
 	draw_line(p1, p2, v, 0xFFFFFF);
 	p2[X] = (v->size + 8) * v->n[i].coords[0] + 1;
-	p2[Y] = (v->size + 20) * v->n[i].coords[1] + 1 + v->size;
+	p2[Y] = (v->size + 20) * v->n[i].coords[1] + 16 + v->size;
 	draw_line(p1, p2, v, 0xFFFFFF);
 	p1[X] = (v->size + 8) * v->n[i].coords[0] + 1 + v->size;
-	p1[Y] = (v->size + 20) * v->n[i].coords[1] + 1 + v->size;
+	p1[Y] = (v->size + 20) * v->n[i].coords[1] + 16 + v->size;
 	draw_line(p2, p1, v, 0xFFFFFF);
 	p2[X] = (v->size + 8) * v->n[i].coords[0] + 1 + v->size;
-	p2[Y] = (v->size + 20) * v->n[i].coords[1] + 1;
+	p2[Y] = (v->size + 20) * v->n[i].coords[1] + 16;
 	draw_line(p2, p1, v, 0xFFFFFF);
 	draw_links(v, i);
 	return (1);

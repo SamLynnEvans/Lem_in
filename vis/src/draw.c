@@ -19,8 +19,8 @@ void	print_toscreen(t_vis *v)
 
 void	print_start(t_vis *v)
 {
-	mlx_string_put(v->mlx, v->win, 470, 300, 0xFFFFFF, "ANTZ");
-	mlx_string_put(v->mlx, v->win, 390, 330, 0xFFFFFF, "press enter to begin");
+	mlx_string_put(v->mlx, v->win, 570, 300, 0xFFFFFF, "ANTZ");
+	mlx_string_put(v->mlx, v->win, 490, 330, 0xFFFFFF, "press enter to begin");
 }
 
 int	get_move(int *ant, char *room, char *moves, int i)
@@ -58,14 +58,12 @@ void	print_ants(t_vis *v)
 	int	ant;
 	char room[200];
 	int	j;
+	int	end_check;
 
-	if (v->mv == -1)
-	{
-		print_emoji(v->data, v->sl, v->e, v->n[0].put);
-		return ;
-	}
+	end_check = 0;
 	i = 0;
-	while (1)
+	ant = 0;
+	while (v->mv != -1)
 	{
 		j = -1;
 		if (!(i = get_move(&ant, room, v->moves[v->mv], i)))
@@ -73,10 +71,12 @@ void	print_ants(t_vis *v)
 		while (++j < v->rooms)
 			if (!(ft_strcmp(v->n[j].name, room)))
 				break;
-		print_emoji(v->data, v->sl, &(v->e[(ant - 1) % 17]), v->n[j].put);
+		if (!v->n[j].end || !end_check)
+			print_emoji(v->data, v->sl, &(v->e[(ant - 1) % 15]), v->n[j].put);
+		end_check = (v->n[j].end) ? 1 : end_check;
 	}
 	if (ant < v->ants)
-		print_emoji(v->data, v->sl, &(v->e[ant % 17]), v->n[0].put);
+		print_emoji(v->data, v->sl, &(v->e[ant % 15]), v->n[0].put);
 }
 
 int	play_game(t_vis *v)
@@ -84,7 +84,7 @@ int	play_game(t_vis *v)
 	int	i;
 
 	i = 0;
-	v->img = mlx_new_image(v->mlx, 1200, 800);
+	v->img = mlx_new_image(v->mlx, v->width, v->height);
 	v->data = mlx_get_data_addr(v->img, &(v->bpp), &(v->sl), &(v->endian));
 	while (i < v->rooms)
 	{
@@ -92,9 +92,12 @@ int	play_game(t_vis *v)
 			return (0);
 		i++;
 	}
+	print_emoji(v->data, v->sl, &(v->e[16]), v->n[1].put - 15 * v->sl + 20);
+	print_emoji(v->data, v->sl, &(v->e[15]), v->n[0].put - 15 * v->sl - 12);
 	mlx_clear_window(v->mlx, v->win);
 	print_ants(v);
-	mlx_put_image_to_window(v->mlx, v->win, v->img, 0, 0);
+	mlx_put_image_to_window(v->mlx, v->win, v->img, (1200 - v->width) / 2, (700 - v->height) / 2);
+	mlx_string_put(v->mlx, v->win, 570, 30, 0xFFFFFF, "ANTZ");
 	return (1);
 }
 
@@ -105,13 +108,18 @@ int		begin_game(int key, t_vis *v)
 	ft_intdebug(key, "key");
 	if (key == 53)
 			exit(1);
-	if (key == 124 && first)
+	if (key == 124 && v->mv >= -1 && first)
 	{
 		if (v->mv + 1 < v->mv_count)
 			v->mv++;
 		play_game(v);
 	}
-	if (key == 36 && !first)
+	if (key == 123 && v->mv >= 0)
+	{
+		v->mv--;
+		play_game(v);
+	}
+	if (key == 36 && v->mv == -1 && !first)
 	{
 		play_game(v);
 		first = 1;
@@ -119,20 +127,56 @@ int		begin_game(int key, t_vis *v)
 	return (1);
 }
 
+void	get_dimensions(t_vis *v)
+{
+	int	i;
+	int x[2];
+	int y[2];
+
+	i = 0;
+	x[0] = 1000;
+	x[1] = 0;
+	y[0] = 1000;
+	y[1] = 0;
+	while (i < v->rooms)
+	{
+		x[0] = (v->n[i].coords[0] < x[0]) ? v->n[i].coords[0] : x[0];
+		x[1] = (v->n[i].coords[0] > x[1]) ? v->n[i].coords[0] : x[1];
+		y[0] = (v->n[i].coords[1] < y[0]) ? v->n[i].coords[1] : y[0];
+		y[1] = (v->n[i].coords[1] > y[1]) ? v->n[i].coords[1] : y[1];
+		i++;
+	}
+	v->height = y[1] - y[0];
+	v->width = x[1] - x[0];
+	i = 0;
+	while (i < v->rooms)
+	{
+		v->n[i].coords[0] -= x[0];
+		v->n[i++].coords[1] -= y[0];
+	}
+}
+
 void	visualiser(t_vis *v)
 {
 	int	i;
+	
+	v->size = 35;
 	i = 0;
 	while (i < v->rooms)
 		free(v->lines[i++]);
 	free(v->lines);
 	v->mv = -1;
+	get_dimensions(v);
+	v->height = (v->size + 20) * (v->height) + v->size + 20;
+	v->width = (v->size + 8) * (v->width) + v->size + 10;
+	if (v->width > 1200 || v->height > 700)
+	{
+		ft_putstr("map too large");
+		error_exit();
+	}
 	v->mlx = mlx_init();
-	v->win = mlx_new_window(v->mlx, 1200, 800, "ANTS");
+	v->win = mlx_new_window(v->mlx, 1200, 700, "ANTS");
 	mlx_key_hook(v->win, begin_game, v);
 	print_start(v);
-//	print_toscreen(v);
-//	start_game(v);
 	mlx_loop(v->mlx);
-//	ft_putstr("poo");
 }

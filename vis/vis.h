@@ -28,7 +28,6 @@ typedef struct	s_emo
 
 typedef struct	s_vis
 {
-	int		ant_count;
 	char	**moves;
 	int		mv_count;
 	int		mv;
@@ -46,6 +45,8 @@ typedef struct	s_vis
 	int		endian;
 	int		bpp;
 	int		size;
+	int		width;
+	int		height;
 	t_node	*n;
 	t_emo	*e;
 }				t_vis;
