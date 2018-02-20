@@ -80,6 +80,21 @@ void	set_emojis(char emojis[25][30])
 {
 	ft_strcpy(emojis[0], "emoji/glasses");
 	ft_strcpy(emojis[1], "emoji/laugh");
+	ft_strcpy(emojis[2], "emoji/angry");
+	ft_strcpy(emojis[3], "emoji/cool");
+	ft_strcpy(emojis[4], "emoji/cry");
+	ft_strcpy(emojis[5], "emoji/mono");
+	ft_strcpy(emojis[6], "emoji/tongue");
+	ft_strcpy(emojis[7], "emoji/nuke");
+	ft_strcpy(emojis[8], "emoji/injure");
+	ft_strcpy(emojis[9], "emoji/robot");
+	ft_strcpy(emojis[10], "emoji/rolling");
+	ft_strcpy(emojis[11], "emoji/bull");
+	ft_strcpy(emojis[12], "emoji/angel");
+	ft_strcpy(emojis[13], "emoji/poo");
+	ft_strcpy(emojis[14], "emoji/goofy");
+	ft_strcpy(emojis[15], "emoji/start");
+	ft_strcpy(emojis[16], "emoji/end");
 }
 
 
@@ -94,8 +109,8 @@ t_emo	*get_emo(void)
 
 	i = 0;
 	set_emojis(emojis);
-	e = malloc(sizeof(t_emo) * 2);
-	while (i < 2)
+	e = malloc(sizeof(t_emo) * 17);
+	while (i < 17)
 	{
 		fd = open(emojis[i], O_RDONLY);
 		if (fd == -1)

@@ -73,8 +73,10 @@ void	print_ants(t_vis *v)
 		while (++j < v->rooms)
 			if (!(ft_strcmp(v->n[j].name, room)))
 				break;
-		print_emoji(v->data, v->sl, &(v->e[ant % 2]), v->n[j].put);
+		print_emoji(v->data, v->sl, &(v->e[(ant - 1) % 17]), v->n[j].put);
 	}
+	if (ant < v->ants)
+		print_emoji(v->data, v->sl, &(v->e[ant % 17]), v->n[0].put);
 }
 
 int	play_game(t_vis *v)

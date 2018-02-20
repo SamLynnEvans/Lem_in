@@ -98,11 +98,11 @@ void	draw_links(t_vis *v, int i)
 
 	j = 0;
 	p1[X] = (v->size + 8) * v->n[i].coords[0] + 1 + v->size / 2;
-	p1[Y] = (v->size + 16) * v->n[i].coords[1] + 1 + v->size / 2;
+	p1[Y] = (v->size + 20) * v->n[i].coords[1] + 1 + v->size / 2;
 	while (v->n[i].links[j] != -1)
 	{
 		p2[X] = (v->size + 8) * v->n[v->n[i].links[j]].coords[0] + 1 + v->size / 2;
-		p2[Y] = (v->size + 16) * v->n[v->n[i].links[j]].coords[1] + 1 + v->size / 2;
+		p2[Y] = (v->size + 20) * v->n[v->n[i].links[j]].coords[1] + 1 + v->size / 2;
 		if (p1[X] < p2[X])
 			draw_line(p1, p2, v, 0xFF8134);
 		else
@@ -118,19 +118,19 @@ int	put_room(t_vis *v, int i)
 
 	v->size = 35;
 	p1[X] = (v->size + 8) * v->n[i].coords[0] + 1;
-	p1[Y] = (v->size + 16) * v->n[i].coords[1] + 1;
+	p1[Y] = (v->size + 20) * v->n[i].coords[1] + 1;
 	v->n[i].put = (p1[X] * 4) + p1[Y] * v->sl;
 	p2[X] = (v->size + 8) * v->n[i].coords[0] + 1 + v->size;
-	p2[Y] = (v->size + 16) * v->n[i].coords[1] + 1;
+	p2[Y] = (v->size + 20) * v->n[i].coords[1] + 1;
 	draw_line(p1, p2, v, 0xFFFFFF);
 	p2[X] = (v->size + 8) * v->n[i].coords[0] + 1;
-	p2[Y] = (v->size + 16) * v->n[i].coords[1] + 1 + v->size;
+	p2[Y] = (v->size + 20) * v->n[i].coords[1] + 1 + v->size;
 	draw_line(p1, p2, v, 0xFFFFFF);
 	p1[X] = (v->size + 8) * v->n[i].coords[0] + 1 + v->size;
-	p1[Y] = (v->size + 16) * v->n[i].coords[1] + 1 + v->size;
+	p1[Y] = (v->size + 20) * v->n[i].coords[1] + 1 + v->size;
 	draw_line(p2, p1, v, 0xFFFFFF);
 	p2[X] = (v->size + 8) * v->n[i].coords[0] + 1 + v->size;
-	p2[Y] = (v->size + 16) * v->n[i].coords[1] + 1;
+	p2[Y] = (v->size + 20) * v->n[i].coords[1] + 1;
 	draw_line(p2, p1, v, 0xFFFFFF);
 	draw_links(v, i);
 	return (1);

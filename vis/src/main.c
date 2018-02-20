@@ -86,7 +86,7 @@ int main(int ac, char **av)
 	t_vis	v;
 	int	fd;
 
-//	ft_printf("%C\n", L'🤓');
+	ft_printf("%C\n", L'😇');
 	v.e = get_emo();
 	if (ac == 2)
 		fd = open(av[1], O_RDONLY);
