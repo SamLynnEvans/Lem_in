@@ -74,35 +74,32 @@ void	set_emojis(char emojis[25][30])
 	ft_strcpy(emojis[16], "emoji/end");
 }
 
-
-t_emo	*get_emo(void)
+void	get_emo(t_vis *v)
 {
 	int	fd;
 	int	i;
 	int	j;
-	t_emo *e;
 	char **lines;
 	char emojis[25][30];
 
 	i = 0;
 	set_emojis(emojis);
-	e = malloc(sizeof(t_emo) * 17);
+	v->e = malloc(sizeof(t_emo) * 17);
 	while (i < 17)
 	{
 		fd = open(emojis[i], O_RDONLY);
 		if (fd == -1)
 			error_exit(0);
-		lines = read_lines(fd, e + i);
-		e[i].emoji = malloc(sizeof(int *) * e[i].y_max + 1);
+		lines = read_lines(fd, v->e + i);
+		v->e[i].emoji = malloc(sizeof(int *) * v->e[i].y_max + 1);
 		j = 0;
-		while (j < e[i].y_max)
+		while (j < v->e[i].y_max)
 		{
-			e[i].emoji[j] = str_to_intdata(lines[j], e[i].x_max);
+			v->e[i].emoji[j] = str_to_intdata(lines[j], v->e[i].x_max);
 			free(lines[j]);
 			j++;
 		}
 		i++;
 		free(lines);
 	}
-	return (e);
 }

@@ -53,7 +53,7 @@ typedef struct	s_vis
 	t_emo	*e;
 }				t_vis;
 
-t_emo	*get_emo(void);
+void	get_emo(t_vis *v);
 t_node	*create_nodes(t_vis *v);
 void	visualiser(t_vis *v);
 int		put_room(t_vis *v, int i);

@@ -1,21 +1,4 @@
 #include "vis.h"
-#include <locale.h>
-
-void	print_toscreen(t_vis *v)
-{
-	while (1)
-	{
-		v->img = mlx_new_image(v->mlx, 500, 500);
-		v->data = mlx_get_data_addr(v->img, &(v->bpp), &(v->sl), &(v->endian));
-		v->data[0] = 0xFF;
-		v->data[1] = 0xFF;
-		v->data[2] = 0xFF;
-		mlx_clear_window(v->mlx, v->win);
-		sleep(1);
-		mlx_put_image_to_window(v->mlx, v->win, v->img, 100, 100);
-		sleep(1);
-	}
-}
 
 void	print_start(t_vis *v)
 {

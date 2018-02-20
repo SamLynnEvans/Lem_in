@@ -29,10 +29,12 @@ int	build_info(t_vis *v, int fd)
 	v->count = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (!(ft_strcmp("##start", line)))
+		if (ft_strcmp("##start", line) == 0)
 			sa[0] += start_end(v, line, 1);
 		else if (ft_strcmp("##end", line) == 0)
 			sa[1] += start_end(v, line, 0);
+		else if (line[0] == '\0')
+			break ;
 		else if (line[0] != '#')
 		{
 			v->lines = ft_add_charpointer(v->lines, line, v->count);
@@ -41,6 +43,7 @@ int	build_info(t_vis *v, int fd)
 		else
 			free(line);
 	}
+	free(line);
 	return ((sa[0] != 1 || sa[1] != 1 || v->start == v->end) ? 0 : 1);
 }
 
@@ -87,7 +90,7 @@ int main(int ac, char **av)
 	int	fd;
 
 //	ft_printf("%C\n", L'😇');
-	v.e = get_emo();
+	get_emo(&v);
 	if (ac == 2)
 		fd = open(av[1], O_RDONLY);
 	else
