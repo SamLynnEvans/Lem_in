@@ -60,5 +60,6 @@ int		put_room(t_vis *v, int i);
 void	error_exit(int a);
 void	put_pixel_img(t_vis *v, int x, int y, int color);
 void	print_emoji(char *data, int sl, t_emo *e, int pos);
+int		play_game(t_vis *v);
 
 #endif

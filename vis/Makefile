@@ -2,7 +2,7 @@ INCLUDES = -I../libft/Includes/ -Iminilibx/ -I.
 
 SRC_PATH = src
 
-SRC_NAME = main.c build_rooms.c draw.c lines.c emo.c
+SRC_NAME = main.c build_rooms.c draw.c lines.c emo.c move_ants.c
 
 NAME = vis
 

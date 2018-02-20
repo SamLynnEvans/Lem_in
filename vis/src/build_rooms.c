@@ -40,6 +40,13 @@ void	add_link(t_node *node, int j)
 	node->links = links;
 }
 
+void	free_split(char **split)
+{
+	free(split[0]);
+	free(split[1]);
+	free(split);
+}
+
 int	link_nodes(t_node *nodes, t_vis *v, char *line)
 {
 	int		i;
@@ -50,8 +57,6 @@ int	link_nodes(t_node *nodes, t_vis *v, char *line)
 	split = malloc(sizeof(char *) * 2);
 	while (line[i] != '-')
 		i++;
-	if (line[i] == '\0' || line[i + 1] == '\0')
-		return (0);
 	split[0] = ft_strsub(line, 0, i++);
 	split[1] = ft_strsub(line, i, ft_strlen(line));
 	i = -1;
@@ -63,35 +68,11 @@ int	link_nodes(t_node *nodes, t_vis *v, char *line)
 				{
 					add_link(&nodes[i], j);
 					add_link(&nodes[j], i);
+					free_split(split);
 					return ((i == j) ? 0 : 1);
 				}
-	free(split[0]);
-	free(split[1]);
-	free(split);
+	free_split(split);
 	return (0);
-}
-
-void	print_nodes(t_node *n, t_vis *v)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < v->rooms)
-	{
-		j = 0;
-		ft_printf("name : %s\ncoords : %d, %d\nstart : %d\nend : %d\n", n[i].name, n[i].coords[0], n[i].coords[1], n[i].start, n[i].end);
-		ft_putstr("links : ");
-		while (n[i].links[j] != -1)
-		{
-			ft_putstr(n[n[i].links[j]].name);
-			ft_putstr(", ");
-			j++;
-		}
-		ft_putchar('\n');
-		ft_putchar('\n');
-		i++;
-	}
 }
 
 t_node *create_nodes(t_vis *v)
@@ -115,6 +96,5 @@ t_node *create_nodes(t_vis *v)
 	while (i < v->count)
 		if (!(link_nodes(nodes, v, v->lines[i++])))
 			return (NULL);
-//	print_nodes(nodes, v);
 	return (nodes);
 }
