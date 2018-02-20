@@ -6,7 +6,7 @@ void	print_start(t_vis *v)
 	mlx_string_put(v->mlx, v->win, 490, 330, 0xFFFFFF, "press enter to begin");
 }
 
-int		begin_game(int key, t_vis *v)
+int		deal_key(int key, t_vis *v)
 {
 	static int first = 0;
 
@@ -61,6 +61,30 @@ void	get_dimensions(t_vis *v)
 	}
 }
 
+int	put_room(t_vis *v, int i)
+{
+	int	p1[2];
+	int	p2[2];
+
+	p1[X] = (v->size + 8) * v->n[i].coords[0] + 1;
+	p1[Y] = (v->size + 20) * v->n[i].coords[1] + 16;
+	v->n[i].put = (p1[X] * 4) + p1[Y] * v->sl;
+	p2[X] = (v->size + 8) * v->n[i].coords[0] + 1 + v->size;
+	p2[Y] = (v->size + 20) * v->n[i].coords[1] + 16;
+	draw_line(p1, p2, v, 0xFFFFFF);
+	p2[X] = (v->size + 8) * v->n[i].coords[0] + 1;
+	p2[Y] = (v->size + 20) * v->n[i].coords[1] + 16 + v->size;
+	draw_line(p1, p2, v, 0xFFFFFF);
+	p1[X] = (v->size + 8) * v->n[i].coords[0] + 1 + v->size;
+	p1[Y] = (v->size + 20) * v->n[i].coords[1] + 16 + v->size;
+	draw_line(p2, p1, v, 0xFFFFFF);
+	p2[X] = (v->size + 8) * v->n[i].coords[0] + 1 + v->size;
+	p2[Y] = (v->size + 20) * v->n[i].coords[1] + 16;
+	draw_line(p2, p1, v, 0xFFFFFF);
+	draw_links(v, i);
+	return (1);
+}
+
 void	visualiser(t_vis *v)
 {
 	int	i;
@@ -83,7 +107,7 @@ void	visualiser(t_vis *v)
 		error_exit(1);
 	v->mlx = mlx_init();
 	v->win = mlx_new_window(v->mlx, 1200, 700, "ANTS");
-	mlx_key_hook(v->win, begin_game, v);
+	mlx_key_hook(v->win, deal_key, v);
 	print_start(v);
 	mlx_loop(v->mlx);
 }
