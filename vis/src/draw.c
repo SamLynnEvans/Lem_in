@@ -61,29 +61,6 @@ void	get_dimensions(t_vis *v)
 	}
 }
 
-int	put_room(t_vis *v, int i)
-{
-	int	p1[2];
-	int	p2[2];
-
-	p1[X] = (v->size + 8) * v->n[i].coords[0] + 1;
-	p1[Y] = (v->size + 20) * v->n[i].coords[1] + 16;
-	v->n[i].put = (p1[X] * 4) + p1[Y] * v->sl;
-	p2[X] = (v->size + 8) * v->n[i].coords[0] + 1 + v->size;
-	p2[Y] = (v->size + 20) * v->n[i].coords[1] + 16;
-	draw_line(p1, p2, v, 0xFFFFFF);
-	p2[X] = (v->size + 8) * v->n[i].coords[0] + 1;
-	p2[Y] = (v->size + 20) * v->n[i].coords[1] + 16 + v->size;
-	draw_line(p1, p2, v, 0xFFFFFF);
-	p1[X] = (v->size + 8) * v->n[i].coords[0] + 1 + v->size;
-	p1[Y] = (v->size + 20) * v->n[i].coords[1] + 16 + v->size;
-	draw_line(p2, p1, v, 0xFFFFFF);
-	p2[X] = (v->size + 8) * v->n[i].coords[0] + 1 + v->size;
-	p2[Y] = (v->size + 20) * v->n[i].coords[1] + 16;
-	draw_line(p2, p1, v, 0xFFFFFF);
-	draw_links(v, i);
-	return (1);
-}
 
 void	visualiser(t_vis *v)
 {
