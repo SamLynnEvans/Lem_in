@@ -5,12 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/28 12:28:53 by slynn-ev          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/02/28 13:59:01 by slynn-ev         ###   ########.fr       */
-=======
-/*   Updated: 2018/02/28 19:35:06 by slynn-ev         ###   ########.fr       */
->>>>>>> tmp
+/*   Created: 2018/02/28 20:28:17 by slynn-ev          #+#    #+#             */
+/*   Updated: 2018/02/28 20:28:18 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +36,7 @@ void	free_all(t_lem *l, t_node *n)
 	free(n);
 }
 
-<<<<<<< HEAD
-int		main(int ac, char **av)
-=======
 int		main(void)
->>>>>>> tmp
 {
 	t_node	*nodes;
 	t_lem	lem;
