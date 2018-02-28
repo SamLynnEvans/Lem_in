@@ -6,7 +6,11 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 12:01:21 by slynn-ev          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/02/28 14:00:29 by slynn-ev         ###   ########.fr       */
+=======
+/*   Updated: 2018/02/28 14:30:00 by slynn-ev         ###   ########.fr       */
+>>>>>>> tmp
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +27,8 @@ int		fill_nodes(t_node *node, t_lem *l, int j)
 		return (0);
 	ft_strncpy(node[j].name, l->lines[j], i);
 	node[j].name[i] = '\0';
+	if (ft_strchr(node[j].name, '-'))
+		error_exit();
 	node[j].distance = (j == l->start) ? 0 : INT_MAX;
 	node[j].open = 1;
 	node[j].parent = -1;

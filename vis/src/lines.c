@@ -6,7 +6,11 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 15:32:14 by slynn-ev          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/02/28 12:43:05 by slynn-ev         ###   ########.fr       */
+=======
+/*   Updated: 2018/02/28 14:25:37 by slynn-ev         ###   ########.fr       */
+>>>>>>> tmp
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +108,17 @@ void	draw_links(t_vis *v, int i)
 	p1[Y] = (v->size + 20) * v->n[i].coords[1] + 16 + v->size / 2;
 	while (v->n[i].links[j] != -1)
 	{
+<<<<<<< HEAD
 		p2[X] = (v->size + 8)
 		* (v->n[v->n[i].links[j]].coords[0] + 1 + v->size / 2);
 		p2[Y] = (v->size + 20)
 		* (v->n[v->n[i].links[j]].coords[1] + 16 + v->size / 2);
+=======
+		p2[X] = (v->size + 8) * v->n[v->n[i].links[j]].coords[0]
+		+ 1 + v->size / 2;
+		p2[Y] = (v->size + 20) * v->n[v->n[i].links[j]].coords[1]
+		+ 16 + v->size / 2;
+>>>>>>> tmp
 		if (p1[X] < p2[X])
 			draw_line(p1, p2, v, 0xFF8134);
 		else
