@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   build_rooms.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/28 12:38:16 by slynn-ev          #+#    #+#             */
+/*   Updated: 2018/02/28 12:38:46 by slynn-ev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vis.h"
 
-int	fill_nodes(t_node *node, t_vis *v, int j)
+int		fill_nodes(t_node *node, t_vis *v, int j)
 {
 	int	i;
 
@@ -47,7 +59,7 @@ void	free_split(char **split)
 	free(split);
 }
 
-int	link_nodes(t_node *nodes, t_vis *v, char *line)
+int		link_nodes(t_node *nodes, t_vis *v, char *line)
 {
 	int		i;
 	int		j;
@@ -75,7 +87,7 @@ int	link_nodes(t_node *nodes, t_vis *v, char *line)
 	return (0);
 }
 
-t_node *create_nodes(t_vis *v)
+t_node	*create_nodes(t_vis *v)
 {
 	int		i;
 	t_node	*nodes;

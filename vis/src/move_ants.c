@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move_ants.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/28 13:31:15 by slynn-ev          #+#    #+#             */
+/*   Updated: 2018/02/28 13:34:38 by slynn-ev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vis.h"
 
-int	get_move(int *ant, char *room, char *moves, int i)
+int		get_move(int *ant, char *room, char *moves, int i)
 {
 	int	j;
 	int entered;
@@ -31,11 +43,11 @@ int	get_move(int *ant, char *room, char *moves, int i)
 
 void	print_ants(t_vis *v)
 {
-	int	i;
-	int	ant;
-	char room[200];
-	int	j;
-	int	end_check;
+	int		i;
+	int		ant;
+	char	room[200];
+	int		j;
+	int		end_check;
 
 	end_check = 0;
 	i = 0;
@@ -47,7 +59,7 @@ void	print_ants(t_vis *v)
 			break ;
 		while (++j < v->rooms)
 			if (!(ft_strcmp(v->n[j].name, room)))
-				break;
+				break ;
 		if (!v->n[j].end || !end_check)
 			print_emoji(v->data, v->sl, &(v->e[(ant - 1) % 15]), v->n[j].put);
 		end_check = (j == 1) ? 1 : end_check;
@@ -64,15 +76,16 @@ void	print_title(t_vis *v)
 
 	mlx_string_put(v->mlx, v->win, 590, 30, 0xFFFFFF, "ANTZ");
 	mlx_string_put(v->mlx, v->win, 565, 55, 0xFFFFFF, "Turn : ");
-	mlx_string_put(v->mlx, v->win, 640, 55, 0xFFFFFF, (num = ft_itoa(v->mv + 1)));
+	mlx_string_put(v->mlx, v->win, 640, 55, 0xFFFFFF,
+	(num = ft_itoa(v->mv + 1)));
 	free(num);
 	mlx_string_put(v->mlx, v->win, 565, 70, 0xFFFFFF, "Home : ");
-	mlx_string_put(v->mlx, v->win, 640, 70, 0xFFFFFF, (num = ft_itoa(v->home[v->mv + 1])));
+	mlx_string_put(v->mlx, v->win, 640, 70, 0xFFFFFF,
+	(num = ft_itoa(v->home[v->mv + 1])));
 	free(num);
 }
 
-
-int	put_room(t_vis *v, int i)
+int		put_room(t_vis *v, int i)
 {
 	int	p1[2];
 	int	p2[2];
@@ -96,7 +109,7 @@ int	put_room(t_vis *v, int i)
 	return (1);
 }
 
-int	play_game(t_vis *v)
+int		play_game(t_vis *v)
 {
 	int	i;
 
@@ -113,7 +126,8 @@ int	play_game(t_vis *v)
 	print_emoji(v->data, v->sl, &(v->e[15]), v->n[0].put - 15 * v->sl - 12);
 	print_ants(v);
 	mlx_clear_window(v->mlx, v->win);
-	mlx_put_image_to_window(v->mlx, v->win, v->img, (1200 - v->width) / 2, (700 - v->height) / 2);
+	mlx_put_image_to_window(v->mlx, v->win, v->img, (1200 - v->width) / 2,
+	(700 - v->height) / 2);
 	print_title(v);
 	free(v->data);
 	free(v->img);

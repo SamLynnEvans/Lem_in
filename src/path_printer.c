@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path_printer.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/28 12:30:48 by slynn-ev          #+#    #+#             */
+/*   Updated: 2018/02/28 12:32:13 by slynn-ev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
 void	print_info(t_lem *l)
@@ -5,7 +17,8 @@ void	print_info(t_lem *l)
 	int	i;
 
 	i = 0;
-	ft_printf("%d\n##start\n%s\n##end\n%s\n", l->ants, l->lines[l->start], l->lines[l->end]);
+	ft_printf("%d\n##start\n%s\n##end\n%s\n",
+	l->ants, l->lines[l->start], l->lines[l->end]);
 	while (i < l->count)
 	{
 		if (i != l->start && i != l->end)

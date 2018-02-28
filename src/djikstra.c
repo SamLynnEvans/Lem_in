@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 13:24:31 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/02/28 12:00:33 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/02/28 12:28:36 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		djikstra(t_node *n, t_lem *l)
 	closest = 0;
 	while (1)
 	{
-		i = -1; 
+		i = -1;
 		d_min = INT_MAX;
 		all_close = 1;
 		while (++i < l->rooms)

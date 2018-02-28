@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   emo.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/28 12:34:50 by slynn-ev          #+#    #+#             */
+/*   Updated: 2018/02/28 12:38:05 by slynn-ev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vis.h"
 
 void	print_emoji(char *data, int sl, t_emo *e, int pos)
@@ -17,12 +29,12 @@ void	print_emoji(char *data, int sl, t_emo *e, int pos)
 		{
 			if (e->emoji[i][j] || e->emoji[i][j + 1] || e->emoji[i][j + 2])
 			{
-				data[pos + y *sl + x] =  e->emoji[i][j + 2];
-				data[pos + y *sl + x + 2] =  e->emoji[i][j];
-				data[pos + y *sl + x + 1] =  e->emoji[i][j + 1];
+				data[pos + y * sl + x] = e->emoji[i][j + 2];
+				data[pos + y * sl + x + 2] = e->emoji[i][j];
+				data[pos + y * sl + x + 1] = e->emoji[i][j + 1];
 			}
-			j+=8;
-			x+=4;
+			j += 8;
+			x += 4;
 		}
 		y++;
 		i += 2;
@@ -31,7 +43,7 @@ void	print_emoji(char *data, int sl, t_emo *e, int pos)
 
 char	**read_lines(int fd, t_emo *emo)
 {
-	char 	**lines;
+	char	**lines;
 	char	*line;
 	int		i;
 
@@ -45,10 +57,10 @@ char	**read_lines(int fd, t_emo *emo)
 	}
 	i = 0;
 	while (lines[0][i])
-		{
-			if (lines[0][i++] == ' ')
+	{
+		if (lines[0][i++] == ' ')
 			emo->x_max++;
-		}
+	}
 	emo->x_max++;
 	return (lines);
 }
@@ -76,11 +88,11 @@ void	set_emojis(char emojis[25][30])
 
 void	get_emo(t_vis *v)
 {
-	int	fd;
-	int	i;
-	int	j;
-	char **lines;
-	char emojis[25][30];
+	int		fd;
+	int		i;
+	int		j;
+	char	**lines;
+	char	emojis[25][30];
 
 	i = 0;
 	set_emojis(emojis);
@@ -92,12 +104,11 @@ void	get_emo(t_vis *v)
 			error_exit(0);
 		lines = read_lines(fd, v->e + i);
 		v->e[i].emoji = malloc(sizeof(int *) * v->e[i].y_max + 1);
-		j = 0;
-		while (j < v->e[i].y_max)
+		j = -1;
+		while (++j < v->e[i].y_max)
 		{
 			v->e[i].emoji[j] = str_to_intdata(lines[j], v->e[i].x_max);
 			free(lines[j]);
-			j++;
 		}
 		i++;
 		free(lines);

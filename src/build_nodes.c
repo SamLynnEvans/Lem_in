@@ -6,13 +6,13 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 12:01:21 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/02/28 12:21:12 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/02/28 14:00:29 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int	fill_nodes(t_node *node, t_lem *l, int j)
+int		fill_nodes(t_node *node, t_lem *l, int j)
 {
 	int	i;
 
@@ -28,7 +28,8 @@ int	fill_nodes(t_node *node, t_lem *l, int j)
 	node[j].parent = -1;
 	node[j].start = (j == l->start) ? 1 : 0;
 	node[j].end = (j == l->end) ? 1 : 0;
-	node[j].links = malloc(sizeof(int) * 1);
+	if (!(node[j].links = malloc(sizeof(int) * 1)))
+		error_exit();
 	node[j].links[0] = -1;
 	return (1);
 }
@@ -41,7 +42,8 @@ void	add_link(t_node *node, int j)
 	i = 0;
 	while (node->links[i] != -1)
 		i++;
-	links = malloc(sizeof(int) * (i + 3));
+	if (!(links = malloc(sizeof(int) * (i + 3))))
+		error_exit();
 	i = -1;
 	while (node->links[++i] != -1)
 		links[i] = node->links[i];
@@ -59,7 +61,7 @@ int		free_split(char **split)
 	return (0);
 }
 
-int	link_nodes(t_node *nodes, t_lem *l, char *line)
+int		link_nodes(t_node *nodes, t_lem *l, char *line)
 {
 	int		i;
 	int		j;
@@ -68,9 +70,8 @@ int	link_nodes(t_node *nodes, t_lem *l, char *line)
 	i = 0;
 	while (line[i] != '-' && line[i] != '\0')
 		i++;
-	if (!line[i])
-		return (0);
-	split = malloc(sizeof(char *) * 2);
+	if (!(split = malloc(sizeof(char *) * 2)) || !line[i])
+		error_exit();
 	split[0] = ft_strsub(line, 0, i++);
 	split[1] = ft_strsub(line, i, ft_strlen(line));
 	i = -1;
@@ -88,7 +89,7 @@ int	link_nodes(t_node *nodes, t_lem *l, char *line)
 	return (free_split(split));
 }
 
-t_node *create_nodes(t_lem *l)
+t_node	*create_nodes(t_lem *l)
 {
 	int		i;
 	t_node	*nodes;
@@ -101,7 +102,8 @@ t_node *create_nodes(t_lem *l)
 	if (i == l->count)
 		return (NULL);
 	l->rooms = i;
-	nodes = malloc(sizeof(t_node) * (i + 1));
+	if (!(nodes = malloc(sizeof(t_node) * (i + 1))))
+		error_exit();
 	j = -1;
 	while (++j < i)
 		if (!(fill_nodes(nodes, l, j)))
