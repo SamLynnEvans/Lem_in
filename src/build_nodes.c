@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   build_nodes.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/28 12:01:21 by slynn-ev          #+#    #+#             */
+/*   Updated: 2018/02/28 12:21:12 by slynn-ev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
 int	fill_nodes(t_node *node, t_lem *l, int j)
@@ -39,11 +51,12 @@ void	add_link(t_node *node, int j)
 	node->links = links;
 }
 
-void	free_split(char **split)
+int		free_split(char **split)
 {
 	free(split[0]);
 	free(split[1]);
 	free(split);
+	return (0);
 }
 
 int	link_nodes(t_node *nodes, t_lem *l, char *line)
@@ -53,9 +66,11 @@ int	link_nodes(t_node *nodes, t_lem *l, char *line)
 	char	**split;
 
 	i = 0;
-	split = malloc(sizeof(char *) * 2);
-	while (line[i] != '-')
+	while (line[i] != '-' && line[i] != '\0')
 		i++;
+	if (!line[i])
+		return (0);
+	split = malloc(sizeof(char *) * 2);
 	split[0] = ft_strsub(line, 0, i++);
 	split[1] = ft_strsub(line, i, ft_strlen(line));
 	i = -1;
@@ -70,8 +85,7 @@ int	link_nodes(t_node *nodes, t_lem *l, char *line)
 					free_split(split);
 					return ((i == j) ? 0 : 1);
 				}
-	free_split(split);
-	return (0);
+	return (free_split(split));
 }
 
 t_node *create_nodes(t_lem *l)
