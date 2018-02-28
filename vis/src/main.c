@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/28 12:41:13 by slynn-ev          #+#    #+#             */
+/*   Updated: 2018/02/28 12:41:38 by slynn-ev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vis.h"
 
 void	error_exit(int a)
@@ -9,12 +21,11 @@ void	error_exit(int a)
 	exit(1);
 }
 
-int main(int ac, char **av)
+int		main(int ac, char **av)
 {
 	t_vis	v;
-	int	fd;
+	int		fd;
 
-//	ft_printf("%C\n", L'😇');
 	get_emo(&v);
 	if (ac == 2)
 		fd = open(av[1], O_RDONLY);

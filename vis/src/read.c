@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/28 12:43:16 by slynn-ev          #+#    #+#             */
+/*   Updated: 2018/02/28 12:43:37 by slynn-ev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vis.h"
 
-int	start_end(t_vis *v, char *line, int start)
+int		start_end(t_vis *v, char *line, int start)
 {
 	if (start)
 		v->start = v->count;
@@ -10,7 +22,7 @@ int	start_end(t_vis *v, char *line, int start)
 	return (1);
 }
 
-int	build_info(t_vis *v, int fd)
+int		build_info(t_vis *v, int fd)
 {
 	char	*line;
 	int		sa[2];
@@ -38,7 +50,7 @@ int	build_info(t_vis *v, int fd)
 	return ((sa[0] != 1 || sa[1] != 1 || v->start == v->end) ? 0 : 1);
 }
 
-int	get_ants(int fd)
+int		get_ants(int fd)
 {
 	char	*line;
 	int		i;

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lem_in.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/28 12:29:21 by slynn-ev          #+#    #+#             */
+/*   Updated: 2018/02/28 13:57:11 by slynn-ev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
-int	*get_path(t_node *n)
+int		*get_path(t_node *n)
 {
 	int	i;
 	int	*path;
@@ -17,7 +29,8 @@ int	*get_path(t_node *n)
 		i = n[i].parent;
 		count++;
 	}
-	path = malloc(sizeof(int) * (count + 1));
+	if (!(path = malloc(sizeof(int) * (count + 1))))
+		error_exit();
 	path[0] = count;
 	i = 1;
 	while (n[j].start != 1)
@@ -28,13 +41,14 @@ int	*get_path(t_node *n)
 	return (path);
 }
 
-int	**add_route(t_node *n, t_lem *l)
+int		**add_route(t_node *n, t_lem *l)
 {
 	int	**routes;
 	int	i;
 
 	i = -1;
-	routes = malloc(sizeof(int *) * (l->route_no + 1));
+	if (!(routes = malloc(sizeof(int *) * (l->route_no + 1))))
+		error_exit();
 	while (++i < l->route_no)
 		routes[i] = l->routes[i];
 	routes[i] = get_path(n);
@@ -69,7 +83,7 @@ void	reset_nodes(t_node *n, t_lem *l)
 int		lem_in(t_node *n, t_lem *l)
 {
 	l->route_no = 0;
-	while (l->route_no < l->ants && djikstra(n , l))
+	while (l->route_no < l->ants && djikstra(n, l))
 	{
 		l->routes = add_route(n, l);
 		l->route_no++;
@@ -77,20 +91,3 @@ int		lem_in(t_node *n, t_lem *l)
 	}
 	return ((l->route_no > 0) ? 1 : 0);
 }
-/*
-	int i;
-	int	j;
-
-	i = 0;
-	while (i < l->route_no)
-	{
-		j = 1;	
-		while (j < l->routes[i][0])
-		{
-			ft_putstr(n[l->routes[i][j++]].name);
-			ft_putstr(", ");
-		}
-		ft_putchar('\n');
-		i++;
-	}
-*/

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/28 12:39:10 by slynn-ev          #+#    #+#             */
+/*   Updated: 2018/02/28 12:40:50 by slynn-ev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vis.h"
 
 void	print_start(t_vis *v)
@@ -13,7 +25,7 @@ int		deal_key(int key, t_vis *v)
 	if (v->mv + 1 == v->mv_count)
 		v->done = 1;
 	if (key == 53)
-			exit(1);
+		exit(1);
 	if (key == 124 && v->mv >= -1 && first && v->mv + 1 < v->mv_count)
 	{
 		v->mv++;
@@ -61,11 +73,10 @@ void	get_dimensions(t_vis *v)
 	}
 }
 
-
 void	visualiser(t_vis *v)
 {
 	int	i;
-	
+
 	v->size = 35;
 	i = 0;
 	while (i < v->rooms)
@@ -75,7 +86,7 @@ void	visualiser(t_vis *v)
 	v->home = malloc(sizeof(int) * (v->mv_count + 1));
 	i = 0;
 	while (i < v->mv_count + 1)
-		v->home[i++] = 0; 
+		v->home[i++] = 0;
 	v->mv = -1;
 	get_dimensions(v);
 	v->height = (v->size + 20) * (v->height) + v->size + 20;
