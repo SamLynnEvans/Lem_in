@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 12:26:09 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/05 17:57:22 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/05 18:31:41 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ typedef struct	s_node
 typedef struct	s_lem
 {
 	char		**lines;
-	char		**comments;
-	int			*comment_no;
+	char		**map;
 	int			ants;
 	int			start;
 	int			end;
 	int			rooms;
 	int			count;
+	int			maplines;
 	int			route_no;
 	int			**routes;
 }				t_lem;

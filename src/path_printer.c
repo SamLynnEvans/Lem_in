@@ -6,45 +6,25 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 12:30:48 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/05 18:25:57 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/05 18:39:54 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	free_info(t_lem *l)
-{
-	if (l->comment_no)
-	{
-		free(l->comments);
-		free(l->comment_no);
-	}
-	free(l->lines);	
-}
-
 void	print_info(t_lem *l)
 {
 	int	i;
-	int	j;
 
-	i = -1;
-	j = 0;
-	while (++i < l->count)
+	i = 0;
+	while (i < l->maplines)
 	{
-		if (l->comment_no && i == l->comment_no[j])
-		{
-			ft_printf("%s\n", l->comments[j]);
-			free(l->comments[j]);
-			j++;
-		}
-		if (i == l->start)
-			ft_printf("##start\n"); 
-		if (i == l->end)
-			ft_printf("##end\n"); 
-		ft_printf("%s\n", l->lines[i]);
-		free(l->lines[i]);
+		ft_printf("%s\n", l->map[i]);
+		free(l->map[i]);
+		i++;
 	}
-	free_info(l);
+	free(l->map);
+	free(l->lines);
 	ft_printf("\n");
 }
 

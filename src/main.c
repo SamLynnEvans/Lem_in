@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 20:28:17 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/05 18:22:14 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/05 18:44:51 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,12 @@ void	error_exit(t_lem *l, int need_free)
 	i = 0;
 	if (need_free)
 	{
-		while (i < l->count)
-			free(l->lines[i++]);
-		if (l->comment_no)
-		{
-			i = 0;
-			ft_intdebug((int)sizeof(l->comment_no) / 2, "size");
-			while (i < (int)sizeof(l->comment_no) / 2)
-				free(l->comments[i++]);
-			free(l->comments);
-			free(l->comment_no);
-			free(l->lines);
-		}
+		while (i < l->maplines)
+			free(l->map[i++]);
+		free(l->map);
+		free(l->lines);
 	}
 	ft_putstr("ERROR\n");
-	while (1);
 	exit(1);
 }
 
@@ -60,7 +51,6 @@ int		main(void)
 	t_node	*nodes;
 	t_lem	lem;
 
-//	nodes = NULL;
 	if (!(lem.ants = get_ants(0)))
 		error_exit(&lem, 0);
 	if (!(build_info(0, &lem)))
