@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 12:29:21 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/02/28 13:57:11 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/05 17:01:39 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		*get_path(t_node *n)
 		count++;
 	}
 	if (!(path = malloc(sizeof(int) * (count + 1))))
-		error_exit();
+		return (0);
 	path[0] = count;
 	i = 1;
 	while (n[j].start != 1)
@@ -48,7 +48,7 @@ int		**add_route(t_node *n, t_lem *l)
 
 	i = -1;
 	if (!(routes = malloc(sizeof(int *) * (l->route_no + 1))))
-		error_exit();
+		return (0);
 	while (++i < l->route_no)
 		routes[i] = l->routes[i];
 	routes[i] = get_path(n);
@@ -85,9 +85,15 @@ int		lem_in(t_node *n, t_lem *l)
 	l->route_no = 0;
 	while (l->route_no < l->ants && djikstra(n, l))
 	{
-		l->routes = add_route(n, l);
+		if (!(l->routes = add_route(n, l)))
+			return (0);
 		l->route_no++;
 		reset_nodes(n, l);
 	}
-	return ((l->route_no > 0) ? 1 : 0);
+	if (!l->route_no)
+	{
+		free_all(l, n);
+		return (0);
+	}
+	return (1);
 }
