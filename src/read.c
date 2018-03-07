@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 12:30:33 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/05 18:41:21 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/07 12:47:51 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int	build_info(int fd, t_lem *l)
 			l->count++;
 		}
 		l->map = ft_add_charpointer(l->map, line, l->maplines++);
-		if (!line[0])
-			return (0);
 	}
 	return ((sa[0] != 1 || sa[1] != 1 || l->start == l->end) ? 0 : 1);
 }

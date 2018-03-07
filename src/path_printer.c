@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 12:30:48 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/05 18:39:54 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/07 12:50:05 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	print_info(t_lem *l)
 	int	i;
 
 	i = 0;
+	ft_putnbr(l->ants);
+	ft_printf("\n");
 	while (i < l->maplines)
 	{
 		ft_printf("%s\n", l->map[i]);
