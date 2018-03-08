@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 11:52:39 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/02/28 13:44:16 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/08 13:22:15 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,6 @@ void				ft_strdel(char **as);
 void				ft_striter(char *s, void(*f)(char *));
 void				ft_striteri(char *s, void(*f)(unsigned int, char *));
 int					*str_to_intdata(char *str, int size);
+long				ft_atol(const char *s);
 
 #endif

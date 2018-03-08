@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 20:28:17 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/05 18:44:51 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/08 13:10:57 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		main(void)
 	t_node	*nodes;
 	t_lem	lem;
 
-	if (!(lem.ants = get_ants(0)))
+	if ((lem.ants = get_ants(0)) <= 0)
 		error_exit(&lem, 0);
 	if (!(build_info(0, &lem)))
 		error_exit(&lem, 1);

@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 13:31:15 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/02/28 13:34:38 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/08 11:35:05 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	print_ants(t_vis *v)
 				break ;
 		if (!v->n[j].end || !end_check)
 			print_emoji(v->data, v->sl, &(v->e[(ant - 1) % 15]), v->n[j].put);
-		end_check = (j == 1) ? 1 : end_check;
-		v->home[v->mv + 1] += (j == 1 && !v->done) ? 1 : 0;
+		end_check = (j == v->end) ? 1 : end_check;
+		v->home[v->mv + 1] += (j == v->end && !v->done) ? 1 : 0;
 	}
 	v->home[v->mv + 1] += (v->done || v->mv == -1) ? 0 : v->home[v->mv];
 	if (ant < v->ants)
@@ -122,8 +122,10 @@ int		play_game(t_vis *v)
 			return (0);
 		i++;
 	}
-	print_emoji(v->data, v->sl, &(v->e[16]), v->n[1].put - 15 * v->sl + 20);
-	print_emoji(v->data, v->sl, &(v->e[15]), v->n[0].put - 15 * v->sl - 12);
+	print_emoji(v->data, v->sl, &(v->e[16]),
+	v->n[v->end].put - 15 * v->sl + 20);
+	print_emoji(v->data, v->sl, &(v->e[15]),
+	v->n[v->start].put - 15 * v->sl - 12);
 	print_ants(v);
 	mlx_clear_window(v->mlx, v->win);
 	mlx_put_image_to_window(v->mlx, v->win, v->img, (1200 - v->width) / 2,

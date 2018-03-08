@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 20:28:31 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/05 18:44:21 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/08 11:47:05 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_node	*create_nodes(t_lem *l)
 	int		j;
 
 	i = -1;
-	while (++i < l->count || i != INT_MAX)
+	while (++i < l->count && i != INT_MAX)
 		if (ft_strchr(l->lines[i], '-'))
 			break ;
 	if (i == l->count || i == INT_MAX)

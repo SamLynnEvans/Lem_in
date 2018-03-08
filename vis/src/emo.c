@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 12:34:50 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/02/28 12:38:05 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/08 11:10:13 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	get_emo(t_vis *v)
 	int		i;
 	int		j;
 	char	**lines;
-	char	emojis[25][30];
+	char	emojis[17][30];
 
 	i = 0;
 	set_emojis(emojis);

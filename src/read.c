@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 12:30:33 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/07 12:47:51 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/08 13:21:22 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	get_ants(int fd)
 {
 	char	*line;
 	int		i;
+	long	num;
 
 	i = 0;
 	if (get_next_line(fd, &line) != 1)
@@ -65,7 +66,9 @@ int	get_ants(int fd)
 		free(line);
 		return (0);
 	}
-	i = ft_atoi(line);
+	num = ft_atol(line);
 	free(line);
-	return (i);
+	if ((num = ft_atol(line)) > INT_MAX || num <=0)
+		return (0);	
+	return ((int)(num));
 }
