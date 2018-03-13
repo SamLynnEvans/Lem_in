@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 12:41:13 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/02/28 12:41:38 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/13 12:08:22 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,12 @@ void	error_exit(int a)
 	exit(1);
 }
 
-int		main(int ac, char **av)
+int		main(void)
 {
 	t_vis	v;
 	int		fd;
 
 	get_emo(&v);
-	if (ac == 2)
-		fd = open(av[1], O_RDONLY);
-	else
 		fd = 0;
 	if (!(v.ants = get_ants(fd)))
 		error_exit(0);

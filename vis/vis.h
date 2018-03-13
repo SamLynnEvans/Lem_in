@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 13:35:18 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/02/28 13:40:56 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/03/13 12:08:57 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "get_next_line.h"
 # include "ft_printf.h"
 # include "mlx.h"
+# include <fcntl.h>
 
 typedef struct	s_node
 {
