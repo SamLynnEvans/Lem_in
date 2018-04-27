@@ -6,13 +6,13 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 13:24:31 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/02/28 12:28:36 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/04/27 13:50:12 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	evaluate_node(t_node *n, int i)
+void	evaluate_node(t_node *n, int i, int start_end_route)
 {
 	int	j;
 	int	link;
@@ -21,12 +21,16 @@ void	evaluate_node(t_node *n, int i)
 	while (n[i].links[j] != -1)
 	{
 		link = n[i].links[j];
+		if (start_end_route && n[i].start == 1 && n[link].end == 1)
+			n[link].open = 0;
 		if (n[link].open == 1 &&
 		n[link].distance > n[i].distance + 1)
 		{
 			n[link].distance = n[i].distance + 1;
 			n[link].parent = i;
 		}
+		if (start_end_route && n[i].start == 1 && n[link].end == 1)
+			n[link].open = 1;
 		j++;
 	}
 	n[i].open = 0;
@@ -57,6 +61,6 @@ int		djikstra(t_node *n, t_lem *l)
 		}
 		if (d_min == INT_MAX)
 			return (all_close == 1) ? 1 : 0;
-		evaluate_node(n, closest);
+		evaluate_node(n, closest, l->start_end_route);
 	}
 }

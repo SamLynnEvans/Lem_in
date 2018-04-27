@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 12:38:16 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/08 11:07:53 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/04/26 19:49:18 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ int		fill_nodes(t_node *node, t_vis *v, int j)
 		return (0);
 	ft_strncpy(node[j].name, v->lines[j], i);
 	node[j].name[i++] = '\0';
-	node[j].coords[0] = ft_atoi(v->lines[j] + i);
-	while (ft_isdigit(v->lines[j][i]))
-		i++;
-	node[j].coords[1] = ft_atoi(v->lines[j] + i + 1);
+	if (!get_coords(v->lines[j] + i, node[j].coords))
+		return (0);
 	node[j].start = (j == v->start) ? 1 : 0;
 	node[j].end = (j == v->end) ? 1 : 0;
 	node[j].links = malloc(sizeof(int) * 1);

@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 20:28:31 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/08 11:47:05 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/04/27 13:50:48 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int		fill_nodes(t_node *node, t_lem *l, int j)
 	if (!i || !(node[j].name = malloc(i + 1)))
 		return (0);
 	ft_strncpy(node[j].name, l->lines[j], i);
-	node[j].name[i] = '\0';
+	node[j].name[i++] = '\0';
+	if (!check_coords(l->lines[j] + i))
+		return (0);
 	node[j].distance = (j == l->start) ? 0 : INT_MAX;
 	node[j].open = 1;
 	node[j].parent = -1;
@@ -85,7 +87,7 @@ int		link_nodes(t_node *nodes, t_lem *l, char *line)
 					if (!(add_link(&nodes[i], j)) || !(add_link(&nodes[j], i)))
 						return (0);
 					free_split(split);
-					return ((i == j) ? 0 : 1);
+					return (1);
 				}
 	return (free_split(split));
 }
@@ -95,10 +97,11 @@ t_node	*create_nodes(t_lem *l)
 	int		i;
 	t_node	*nodes;
 	int		j;
+	char	*ret;
 
 	i = -1;
 	while (++i < l->count && i != INT_MAX)
-		if (ft_strchr(l->lines[i], '-'))
+		if ((ret = ft_strchr(l->lines[i], '-')) && *(ret - 1) != ' ')
 			break ;
 	if (i == l->count || i == INT_MAX)
 		return (NULL);

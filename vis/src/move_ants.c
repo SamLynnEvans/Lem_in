@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 13:31:15 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/08 11:35:05 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/04/27 12:51:01 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	print_ants(t_vis *v)
 	}
 	v->home[v->mv + 1] += (v->done || v->mv == -1) ? 0 : v->home[v->mv];
 	if (ant < v->ants)
-		print_emoji(v->data, v->sl, &(v->e[ant % 15]), v->n[0].put);
+		print_emoji(v->data, v->sl, &(v->e[ant % 15]), v->n[v->start].put);
 }
 
 void	print_title(t_vis *v)

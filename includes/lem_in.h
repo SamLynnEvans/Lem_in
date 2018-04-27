@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 12:26:09 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/05 18:31:41 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/04/27 11:28:48 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,18 @@ typedef struct	s_lem
 	int			count;
 	int			maplines;
 	int			route_no;
+	int			start_end_route;
 	int			**routes;
 }				t_lem;
 
 void			error_exit(t_lem *l, int need_free);
+int				check_coords(char *str);
 int				lem_in(t_node *nodes, t_lem *lem);
 void			print_paths(t_node *nodes, t_lem *lem);
 t_node			*create_nodes(t_lem *l);
 int				djikstra(t_node *n, t_lem *l);
 int				build_info(int fd, t_lem *lem);
-int				get_ants(int fd);
+int				get_ants(int fd, t_lem *l);
 void			free_all(t_lem *l, t_node *n);
 
 #endif

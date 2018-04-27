@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 12:29:21 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/05 17:01:39 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/04/27 11:28:20 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,13 @@ void	reset_nodes(t_node *n, t_lem *l)
 int		lem_in(t_node *n, t_lem *l)
 {
 	l->route_no = 0;
+	l->start_end_route = 0;
 	while (l->route_no < l->ants && djikstra(n, l))
 	{
 		if (!(l->routes = add_route(n, l)))
 			return (0);
+		if (l->routes[0][0] == 1)
+			l->start_end_route = 1;
 		l->route_no++;
 		reset_nodes(n, l);
 	}

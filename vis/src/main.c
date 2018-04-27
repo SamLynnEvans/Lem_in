@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 12:41:13 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/13 12:08:22 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/04/26 11:37:34 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		main(void)
 	int		fd;
 
 	get_emo(&v);
-		fd = 0;
+	fd = 0;
 	if (!(v.ants = get_ants(fd)))
 		error_exit(0);
 	if (!(build_info(&v, fd)))

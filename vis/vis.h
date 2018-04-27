@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 13:35:18 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/03/13 12:08:57 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/04/27 11:44:42 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "ft_printf.h"
 # include "mlx.h"
 # include <fcntl.h>
+# include <limits.h>
 
 typedef struct	s_node
 {
@@ -67,6 +68,7 @@ typedef struct	s_vis
 }				t_vis;
 
 void			get_emo(t_vis *v);
+int				get_coords(char *str, int coords[2]);
 t_node			*create_nodes(t_vis *v);
 void			visualiser(t_vis *v);
 void			error_exit(int a);

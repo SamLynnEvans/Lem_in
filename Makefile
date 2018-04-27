@@ -6,7 +6,7 @@
 #    By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/28 14:49:23 by slynn-ev          #+#    #+#              #
-#    Updated: 2018/02/28 14:50:19 by slynn-ev         ###   ########.fr        #
+#    Updated: 2018/04/26 13:15:36 by slynn-ev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,11 +41,11 @@ library :
 	make -C $(LIB)
 
 $(NAME) : $(OBJ) $(DEPS)
-	gcc -o $@ $(OBJ) $(LIB)/$(LIBA)
+	gcc -o $@ $(OBJ) $(LIB)/$(LIBA) -g
 
 $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
 	@mkdir -p $(OBJ_PATH)
-	@gcc $(FLAGS) -o $@ -c $< $(INCLUDES)
+	@gcc $(FLAGS) -o $@ -c $< $(INCLUDES) -g
 
 clean :
 	make clean -C $(LIB)
