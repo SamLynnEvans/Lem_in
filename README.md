@@ -1,5 +1,7 @@
 # Lem_in
 
+<img src="visualiser_img.png" alt="Lem-in visualiser">
+
 Lem_in brings ants from a start room to an end room in the shortest amount of turns possible.
 
 A dynamic application of the Dijkstra shortest path algorithm ensures that all paths to the end room are found, and the ants are split among them according to each route's distance.
@@ -50,4 +52,14 @@ Call the visualiser by entering the vis folder, typing make, and entering the co
 
 Once the visualiser is running use the right and left arrows to move a turn forward or backward respectively. Press Escape key to exit.
 
+The viusaliser was made with the school 42 and Epitech graphics library, minilibX. It is incredibly basic, essentially consisting of only a few functiosn that creates a screen and allow you to put pixels on it. In order to print the emojis, I had to use numpy to turn the emoji images into arrays, and manipulate them into the correct format to use them in the minilibx. The actual pixel array form of the emjis can be seen in the emoji folder.
+
 <b>Learnings</b>
+
+1. How to implement shortest-path finding algortihms such as Dijkstra or A star.
+
+2. My own implementation of Bresenham's straight line drawing algorithm for the visualiser.
+
+3. I learnt how to turn images into numeric arrays and manipulate them using numpy so they could be formatted correctly and put as individual pixels in the visualiser.
+
+3. Readability. I had to come back to this code to make some edits. Unfortunately the visualiser was utterly incomprehensible to me. This project was still from my early days in the school, and since then I have read the book 'Clean Code'. In future projects I have learnt to be more verbose, and split my functions more neatly, so that each function is assigned to one job.
