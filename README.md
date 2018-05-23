@@ -47,6 +47,8 @@ L1-3 : ant 1 moves to room 3.
 
 <b>Visualiser</b>
 
+<img src="https://media.giphy.com/media/1dNlZAo2GmkavJqhKm/giphy.gif"/>
+
 Call the visualiser by entering the vis folder, typing make, and entering the command:
 
 ../lem-in < ../maps/map_of_your_choice
