@@ -65,4 +65,4 @@ The viusaliser was made with the school 42 and Epitech graphics library, minilib
 
 3. I learnt how to turn images into numeric arrays and manipulate them using numpy so they could be formatted correctly and put as individual pixels in the visualiser.
 
-3. Readability. I had to come back to this code to make some edits. Unfortunately the visualiser was utterly incomprehensible to me. This project was still from my early days in the school, and since then I have read the book 'Clean Code'. In future projects I have learnt to be more verbose, and split my functions more neatly, so that each function is assigned to one job.
+3. Readability. I had to come back to this code to make some edits. Unfortunately the visualiser was utterly incomprehensible to me. This project was still from my early days in the school, and since then I have read the book 'Clean Code'. In future projects I aim to be more verbose, and split my functions more neatly, so that each function is assigned to one job.
